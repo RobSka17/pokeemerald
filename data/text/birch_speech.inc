@@ -1,61 +1,64 @@
-gText_Birch_Welcome::
-	.string "Hi! Sorry to keep you waiting!\p"
-	.string "Welcome to the world of POKéMON!\p"
-	.string "My name is BIRCH.\p"
-	.string "But everyone calls me the POKéMON\n"
-	.string "PROFESSOR.\p"
+gText_Birch_IncomingCall::
+	.string "INCOMING CALL\p"
 	.string "$"
 
-gText_Birch_Pokemon::
-	.string "This is what we call a “POKéMON.”\p"
-	.string "\n"
+gText_Birch_CanYouHearMe::
+	.string "-BZZT-\p"
+	.string "...\p"
+	.string "Hello?\p"
+	.string "Can you hear me?\p"
+	.string "-BZZT-\p"
+	.string "It's PROFESSOR BIRCH...\p"
+	.string "$"
+
+gText_Birch_AhHello::
+	.string "Ah, hello!\p"
+	.string "It seems like the call had some\n"
+	.string "connection problems.\p"
+	.string "I can't really see you but I can\n"
+	.string "hear you, so that's good enough!\p"
+	.string "$"
+
+gText_Birch_YourDad::
+	.string "As you know, your dad asked me to\n"
+	.string "help you with some work experience.\p"
+	.string "Don't worry, I've got something in mind\n"
+	.string "I  think you'll be excited about!\p"
 	.string "$"
 
 gText_Birch_MainSpeech::
-	.string "This world is widely inhabited by\n"
-	.string "creatures known as POKéMON.\p"
-	.string "We humans live alongside POKéMON,\n"
-	.string "at times as friendly playmates, and\l"
-	.string "at times as cooperative workmates.\p"
-	.string "And sometimes, we band together\n"
-	.string "and battle others like us.\p"
-	.string "But despite our closeness, we don't\n"
-	.string "know everything about POKéMON.\p"
-	.string "In fact, there are many, many\n"
-	.string "secrets surrounding POKéMON.\p"
-	.string "To unravel POKéMON mysteries,\n"
-	.string "I've been undertaking research.\l"
-	.string "That's what I do.\p"
+	.string "Friends, family, co-workers,\n"
+	.string "companions in battle...\p"
+	.string "These are just some of the bonds\n"
+	.string "we share with them.\p"
+	.string "And yet, there are still so many\n"
+	.string "things we don't know about POKéMON.\p"
+	.string "That's why I've devoted my life to\n"
+	.string "studying them!\p"
+	.string "But enough about me!\p"
 	.string "$"
 
-gText_Birch_AndYouAre::
-	.string "And you are?$"
-
-gText_Birch_BoyOrGirl::
-	.string "Are you a boy?\n"
-	.string "Or are you a girl?$"
-
-gText_Birch_WhatsYourName::
-	.string "All right.\n"
-	.string "What's your name?$"
-
-gText_Birch_SoItsPlayer::
-	.string "So it's {PLAYER}{KUN}?$"
-
-gText_Birch_YourePlayer::
-	.string "Ah, okay!\p"
-	.string "You're {PLAYER}{KUN} who's moving to my\n"
-	.string "hometown of LITTLEROOT.\l"
-	.string "I get it now!\p"
+gText_Birch_TellMeAboutYourself::
+	.string "Why don't you tell me about yourself?\p"
 	.string "$"
 
-gText_Birch_AreYouReady::
-	.string "All right, are you ready?\p"
-	.string "Your very own adventure is about\n"
-	.string "to unfold.\p"
-	.string "Take courage, and leap into the\n"
-	.string "world of POKéMON where dreams,\l"
-	.string "adventure, and friendships await!\p"
-	.string "Well, I'll be expecting you later.\n"
-	.string "Come see me in my POKéMON LAB.\p"
+gText_Birch_WhatsYourStyle::
+	.string "What's your kind of style?"
+	.string "$"
+
+gText_Birch_NameYouGoBy::
+	.string "Okay! I have your details here but\n"
+	.string "do you have a name you like to go by?$"
+
+gText_Birch_PlayerThen::
+	.string "{PLAYER}{KUN}, then?$"
+
+gText_Birch_WellPlayer::
+	.string "Well, {PLAYER}{KUN}, I look forward\n"
+	.string "to meeting you in person!\p"
+	.string "I'll see you soon!\p"
+	.string "$"
+
+gText_Birch_CallEnded::
+	.string "CALL ENDED"
 	.string "$"
