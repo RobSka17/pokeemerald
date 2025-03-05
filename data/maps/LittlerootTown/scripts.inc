@@ -149,7 +149,7 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	delay 10
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachPlayerAtTruck
 	waitmovement 0
-	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_WereHere, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachDoor
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
@@ -430,6 +430,10 @@ LittlerootTown_EventScript_BirchsHouseSignMale::
 
 LittlerootTown_EventScript_PlayersHouseSignFemale::
 	msgbox LittlerootTown_Text_PlayersHouse, MSGBOX_DEFAULT
+	return
+
+LittlerootTown_EventScript_WarningSign::
+	msgbox LittlerootTown_Text_WarningSign, MSGBOX_DEFAULT
 	return
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger0::
@@ -909,17 +913,23 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	delay 30
 	return
 
-LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
-	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+LittlerootTown_Text_WereHere:
+	.string "MUM: Well, {PLAYER}, we're here!\p"
+	.string "This is LITTLEROOT, our new home!\p"
+	.string "I know you'll be missing JOHTO\n"
+	.string "but we need to support dad.\p"
+	.string "He's been busy getting set up in\n"
+	.string "his new job at the GYM.\p"
+	.string "It's not every day a GYM in another\n"
+	.string "region asks you to take over!\p"
+	.string "...\p"
+	.string "What's that? You got a call from\n"
+	.string "PROFESSOR BIRCH on the way here?\p"
+	.string "Why don't you just check out the\n"
+	.string "house quickly then meet him?\p"
+	.string "He should be either next door\n"
+	.string "or in his LAB."
+	.string "$"
 
 LittlerootTown_Text_WaitPlayer:
 	.string "MOM: Wait, {PLAYER}!$"
@@ -1004,6 +1014,10 @@ LittlerootTown_Text_ProfBirchsLab:
 
 LittlerootTown_Text_PlayersHouse:
 	.string "{PLAYER}'s HOUSE$"
+
+LittlerootTown_Text_WarningSign:
+	.string "Warning! Increase in aggressive\n"
+	.string "wild POKéMON in the area.$"
 
 LittlerootTown_Text_ProfBirchsHouse:
 	.string "PROF. BIRCH'S HOUSE$"
