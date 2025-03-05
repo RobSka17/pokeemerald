@@ -8,12 +8,12 @@ PlayersHouse_2F_EventScript_BlockStairsUntilClockIsSet::
 	return
 
 PlayersHouse_1F_EventScript_EnterHouseMovingIn::
-	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_HouseIntro, MSGBOX_DEFAULT
 	applymovement VAR_0x8004, Common_Movement_FacePlayer
 	waitmovement 0
 	call_if_eq VAR_0x8005, MALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInMale
 	call_if_eq VAR_0x8005, FEMALE, PlayersHouse_1F_EventScript_MomFacePlayerMovingInFemale
-	msgbox PlayersHouse_1F_Text_MoversPokemonGoSetClock, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_SetClock, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_LITTLEROOT_INTRO_STATE, 4
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_PlayerWalkIn
@@ -37,7 +37,7 @@ PlayersHouse_1F_Movement_PlayerWalkIn:
 	step_end
 
 PlayersHouse_1F_EventScript_MomGoSeeRoom::
-	msgbox PlayersHouse_1F_Text_ArentYouInterestedInRoom, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_DontYouWantToSeeYourRoom, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8004, Common_Movement_WalkInPlaceFasterUp
 	applymovement OBJ_EVENT_ID_PLAYER, PlayersHouse_1F_Movement_MovePlayerAwayFromDoor
@@ -81,7 +81,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsMale::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
-	msgbox PlayersHouse_2F_Text_HowDoYouLikeYourRoom, MSGBOX_DEFAULT
+	msgbox PlayersHouse_2F_Text_FinishedSettingClock, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomExitsMale
 	waitmovement 0
@@ -94,7 +94,7 @@ PlayersHouse_2F_EventScript_MomComesUpstairsFemale::
 	waitmovement 0
 	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	msgbox PlayersHouse_2F_Text_HowDoYouLikeYourRoom, MSGBOX_DEFAULT
+	msgbox PlayersHouse_2F_Text_FinishedSettingClock, MSGBOX_DEFAULT
 	closemessage
 	applymovement VAR_0x8008, PlayersHouse_2F_Movement_MomExitsFemale
 	waitmovement 0
@@ -174,6 +174,46 @@ PlayersHouse_1F_EventScript_PetalburgGymReportMale::
 	goto PlayersHouse_1F_EventScript_SetWatchedBroadcast
 	end
 
+PlayersHouse_1F_EventScript_ComeDownFromRoomMale::
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	call PlayersHouse_1F_EventScript_MumPresent
+	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MumApproachForPresentMale
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	call PlayersHouse_1F_EventScript_GiveRunningShoes
+	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MumReturnToSeatFromPresentMale
+	waitmovement 0
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
+	end
+
+PlayersHouse_1F_EventScript_ComeDownFromRoomFemale::
+	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	call PlayersHouse_1F_EventScript_MumPresent
+	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MumApproachForPresentFemale
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	call PlayersHouse_1F_EventScript_GiveRunningShoes
+	applymovement VAR_0x8005, PlayersHouse_1F_Movement_MumReturnToSeatFromPresentFemale
+	waitmovement 0
+	setvar VAR_LITTLEROOT_INTRO_STATE, 7
+	end
+
+PlayersHouse_1F_EventScript_GiveRunningShoes:
+	msgbox PlayersHouse_1F_Text_RunningShoesHereYouGo, MSGBOX_DEFAULT
+	playfanfare MUS_OBTAIN_ITEM
+	message PlayersHouse_1F_Text_PutOnRunningShoes
+	waitfanfare
+	setflag FLAG_RECEIVED_RUNNING_SHOES
+	setflag FLAG_SYS_B_DASH
+	msgbox PlayersHouse_1F_Text_TheyLookGreat, MSGBOX_DEFAULT
+	closemessage
+	delay 30
+	return
+
 PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	applymovement VAR_0x8005, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
@@ -198,6 +238,75 @@ PlayersHouse_1F_EventScript_PetalburgGymReportFemale::
 	waitmovement 0
 	goto PlayersHouse_1F_EventScript_SetWatchedBroadcast
 	end
+
+PlayersHouse_1F_EventScript_MumPresent::
+	playse SE_PIN
+	applymovement VAR_0x8005, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement VAR_0x8005, Common_Movement_Delay48
+	waitmovement 0
+	msgbox PlayersHouse_1F_Text_Present, MSGBOX_DEFAULT
+	closemessage
+	return
+
+PlayersHouse_1F_Movement_MumApproachForPresentMale:
+	walk_up
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_up
+	walk_up
+	face_right
+	step_end
+
+PlayersHouse_1F_Movement_MumReturnToSeatFromPresentMale:
+	walk_down
+	walk_down
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_down
+	face_right
+	step_end
+
+PlayersHouse_1F_Movement_MumApproachForPresentFemale:
+	walk_up
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_up
+	walk_up
+	face_left
+	step_end
+
+PlayersHouse_1F_Movement_MumReturnToSeatFromPresentFemale:
+	walk_down
+	walk_down
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
+	walk_down
+	face_left
+	step_end
+
+PlayersHouse_1F_Text_RunningShoesHereYouGo:
+	.string "MUM: Here you go, {PLAYER}!$"
+
+PlayersHouse_1F_Text_TheyLookGreat:
+	.string "MUM: They look great!\p"
+	.string "If you hold B, you'll be able\n"
+	.string "to dash around with no problem!$"
+
+PlayersHouse_1F_Text_PutOnRunningShoes:
+	.string "{PLAYER} put on the RUNNING SHOES!$"
 
 PlayersHouse_1F_EventScript_MomNoticeGymBroadcast::
 	playse SE_PIN
@@ -312,7 +421,7 @@ PlayersHouse_1F_EventScript_Mom::
 	goto_if_set FLAG_RESCUED_BIRCH, PlayersHouse_1F_EventScript_MomHealsParty
 	goto_if_eq VAR_TEMP_1, 1, PlayersHouse_1F_EventScript_SeeYouHoney
 	goto_if_eq VAR_LITTLEROOT_INTRO_STATE, 7, PlayersHouse_1F_EventScript_DidYouMeetProfBirch
-	msgbox PlayersHouse_1F_Text_IsntItNiceInHere, MSGBOX_DEFAULT
+	msgbox PlayersHouse_1F_Text_HouseIntro, MSGBOX_DEFAULT
 	release
 	end
 

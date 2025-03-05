@@ -433,8 +433,8 @@ LittlerootTown_EventScript_PlayersHouseSignFemale::
 	return
 
 LittlerootTown_EventScript_WarningSign::
-	msgbox LittlerootTown_Text_WarningSign, MSGBOX_DEFAULT
-	return
+	msgbox LittlerootTown_Text_WarningSign, MSGBOX_SIGN
+	end
 
 LittlerootTown_EventScript_GiveRunningShoesTrigger0::
 	lockall
