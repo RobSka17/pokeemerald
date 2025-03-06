@@ -5,6 +5,8 @@
 .set LOCALID_BALL_TOTODILE, 5
 .set LOCALID_BALL_CHIKORITA, 6
 .set LOCALID_AIDE3, 7
+.set LOCALID_BOY, 8
+.set LOCALID_GIRL, 9
 .set LOCALID_AIDE2, 10
 
 LittlerootTown_ProfessorBirchsLab_MapScripts::
@@ -378,6 +380,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Girl::
 	lock
 	faceplayer
 	msgbox LittlerootTown_ProfessorBirchsLabText_Girl, MSGBOX_DEFAULT
+	applymovement LOCALID_GIRL, Common_Movement_FaceOriginalDirection
+	waitmovement 0
 	release
 	end
 
@@ -390,6 +394,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Boy::
 	lock
 	faceplayer
 	msgbox LittlerootTown_ProfessorBirchsLabText_Boy, MSGBOX_DEFAULT
+	applymovement LOCALID_BOY, Common_Movement_FaceOriginalDirection
+	waitmovement 0
 	release
 	end
 

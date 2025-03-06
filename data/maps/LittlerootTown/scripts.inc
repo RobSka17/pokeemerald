@@ -3,6 +3,9 @@
 .set LOCALID_RIVAL, 7
 .set LOCALID_BIRCH, 8
 .set LOCALID_BOY, 3
+.set LOCALID_ZIGZAGOON, 9
+.set LOCALID_WOMAN, 10
+.set LOCALID_KIRLIA, 11
 
 LittlerootTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
@@ -236,7 +239,7 @@ LittlerootTown_EventScript_SetRivalBirchPosForDexUpgradeFemale::
 	end
 
 LittlerootTown_EventScript_FatMan::
-	msgbox LittlerootTown_Text_CanUsePCToStoreItems, MSGBOX_NPC
+	msgbox LittlerootTown_Text_FatMan, MSGBOX_NPC
 	end
 
 LittlerootTown_EventScript_Boy::
@@ -247,6 +250,51 @@ LittlerootTown_EventScript_Boy::
 	waitmovement 0
 	release
 	end
+
+LittlerootTown_Text_KirliaIsPopular:
+	.string "KIRLIA is really popular with the\n"
+	.string "kids in the PROFESSOR's programme.\p"
+	.string "It's very sensitive to human\n"
+	.string "emotions.$"
+
+LittlerootTown_EventScript_Woman::
+	lock
+	faceplayer
+	msgbox LittlerootTown_Text_IntroduceToPokemon, MSGBOX_NPC
+	applymovement LOCALID_WOMAN, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+LittlerootTown_Text_IntroduceToPokemon:
+	.string "We're helping introduce children\n"
+	.string "to POKéMON at a young age.\p"
+	.string "It's part of the PROFESSOR's\n"
+	.string "programme!$"
+
+LittlerootTown_EventScript_Zigzagoon::
+	lock
+	faceplayer
+	playmoncry SPECIES_ZIGZAGOON, CRY_MODE_NORMAL
+	msgbox LittlerootTown_Text_Zigzagoon, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+LittlerootTown_Text_Zigzagoon:
+	.string "ZIGZAGOON: GAGOOON!$"
+
+LittlerootTown_EventScript_Kirlia::
+	lock
+	faceplayer
+	playmoncry SPECIES_KIRLIA, CRY_MODE_NORMAL
+	msgbox LittlerootTown_Text_Kirlia, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+LittlerootTown_Text_Kirlia:
+	.string "KIRLIA: KIII!$"
 
 LittlerootTown_EventScript_Twin::
 	lock
@@ -260,109 +308,6 @@ LittlerootTown_EventScript_Twin::
 LittlerootTown_Text_ZigzagoonIsSoft:
 	.string "ZIGZAGOON's fur is so soft!\p"
 	.string "I love hugging him!$"
-
-LittlerootTown_EventScript_YouSavedBirch::
-	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_YouSavedBirch, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_EventScript_GoodLuck::
-	msgbox LittlerootTown_Text_GoodLuckCatchingPokemon, MSGBOX_DEFAULT
-	release
-	end
-
-LittlerootTown_EventScript_NeedPokemonTriggerLeft::
-	lockall
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinApproachPlayerLeft
-	waitmovement 0
-	call LittlerootTown_EventScript_DangerousWithoutPokemon
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinReturnLeft
-	waitmovement 0
-	releaseall
-	end
-
-LittlerootTown_EventScript_DangerousWithoutPokemon::
-	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinPushPlayerFromRoute
-	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PushPlayerBackFromRoute
-	waitmovement 0
-	msgbox LittlerootTown_Text_DangerousIfYouDontHavePokemon, MSGBOX_DEFAULT
-	closemessage
-	return
-
-LittlerootTown_Movement_TwinApproachPlayerLeft:
-	face_right
-	delay_8
-	disable_jump_landing_ground_effect
-	jump_in_place_right
-	delay_8
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_left
-	face_down
-	step_end
-
-LittlerootTown_Movement_TwinPushPlayerFromRoute:
-	walk_down
-	step_end
-
-LittlerootTown_Movement_TwinReturnLeft:
-	walk_right
-	walk_down
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_up
-	walk_in_place_faster_down
-	step_end
-
-LittlerootTown_Movement_PushPlayerBackFromRoute:
-	lock_facing_direction
-	walk_down
-	unlock_facing_direction
-	step_end
-
-LittlerootTown_EventScript_NeedPokemonTriggerRight::
-	lockall
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinApproachPlayerRight
-	waitmovement 0
-	call LittlerootTown_EventScript_DangerousWithoutPokemon
-	applymovement LOCALID_TWIN, LittlerootTown_Movement_TwinReturnRight
-	waitmovement 0
-	releaseall
-	end
-
-LittlerootTown_Movement_TwinApproachPlayerRight:
-	face_right
-	delay_8
-	disable_jump_landing_ground_effect
-	jump_in_place_right
-	delay_8
-	walk_fast_right
-	walk_fast_right
-	walk_fast_right
-	walk_fast_up
-	walk_fast_up
-	walk_fast_right
-	face_down
-	step_end
-
-LittlerootTown_Movement_TwinReturnRight:
-	walk_left
-	walk_down
-	walk_left
-	walk_left
-	walk_left
-	walk_in_place_faster_down
-	step_end
 
 LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
@@ -882,18 +827,12 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "If anything happens, you can come home.\p"
 	.string "Go on, go get them, honey!$"
 
-LittlerootTown_Text_CanUsePCToStoreItems:
+LittlerootTown_Text_FatMan:
 	.string "The HOENN region is changing but\n"
 	.string "BIRCH is helping a lot.\p"
 	.string "He set up a whole new scheme.\p"
-	.string "It's dedicated to preparing\n"
-	.string "the next generation of trainers.$"
-
-LittlerootTown_Text_KirliaIsPopular:
-	.string "KIRLIA is really popular with the\n"
-	.string "kids in the PROFESSOR's programme.\p"
-	.string "It's very sensitive to human\n"
-	.string "emotions.$"
+	.string "It's dedicated to preparing the next\n"
+	.string "generation of trainers.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Um, um, um!\p"
