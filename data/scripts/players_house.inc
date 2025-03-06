@@ -253,26 +253,6 @@ PlayersHouse_1F_Text_TheyLookGreat:
 PlayersHouse_1F_Text_PutOnRunningShoes:
 	.string "{PLAYER} put on the RUNNING SHOES!$"
 
-PlayersHouse_1F_EventScript_MomNoticeGymBroadcast::
-	playse SE_PIN
-	applymovement VAR_0x8005, Common_Movement_ExclamationMark
-	waitmovement 0
-	applymovement VAR_0x8005, Common_Movement_Delay48
-	waitmovement 0
-	msgbox PlayersHouse_1F_Text_OhComeQuickly, MSGBOX_DEFAULT
-	closemessage
-	return
-
-PlayersHouse_1F_EventScript_WatchGymBroadcast::
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp
-	waitmovement 0
-	msgbox PlayersHouse_1F_Text_ReportFromPetalburgGym, MSGBOX_DEFAULT
-	fadedefaultbgm
-	special TurnOffTVScreen
-	setflag FLAG_SYS_TV_HOME
-	delay 35
-	return
-
 PlayersHouse_1F_Movement_MomApproachDadMale:
 	walk_up
 	walk_right
@@ -710,3 +690,22 @@ PlayersHouse_1F_Movement_PlayerApproachTVForLatiFemale:
 EventScript_RunningShoesManual::
 	msgbox PlayersHouse_1F_Text_RunningShoesManual, MSGBOX_SIGN
 	end
+
+
+PlayersHouse_2F_EventScript_PetSkitty::
+	lock
+	faceplayer
+	msgbox PlayersHouse_2F_Text_PetSkitty, MSGBOX_DEFAULT
+	waitse
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
+	msgbox PlayersHouse_2F_Text_PetSkitty2, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+	
+
+PlayersHouse_2F_Text_PetSkitty:
+	.string "{PLAYER} pet SKITTY.$"
+
+PlayersHouse_2F_Text_PetSkitty2:
+	.string "SKITTY: SKIII!$"

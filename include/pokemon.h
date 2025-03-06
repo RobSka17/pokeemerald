@@ -355,7 +355,7 @@ struct __attribute__((packed)) LevelUpMove
 struct Evolution
 {
     u16 method;
-    u16 param;
+    u16 params[2];
     u16 targetSpecies;
 };
 

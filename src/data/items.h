@@ -2633,7 +2633,7 @@ const struct Item gItems[] =
         .description = sTwistedSpoonDesc,
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
     [ITEM_CHARCOAL] =
