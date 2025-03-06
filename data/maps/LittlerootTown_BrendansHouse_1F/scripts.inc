@@ -303,26 +303,6 @@ PlayersHouse_1F_Text_Present:
 	.string "Before you go, I wanted to\n"
 	.string "give you a little present!$"
 
-PlayersHouse_1F_Text_OhComeQuickly:
-	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
-	.string "Quick! Come quickly!$"
-
-PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "MOM: Look! It's PETALBURG GYM!\n"
-	.string "Maybe DAD will be on!$"
-
-PlayersHouse_1F_Text_ItsOverWeMissedHim:
-	.string "MOM: Oh… It's over.\p"
-	.string "I think DAD was on, but we missed him.\n"
-	.string "Too bad.$"
-
-PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
-	.string "Oh, yes.\n"
-	.string "One of DAD's friends lives in town.\p"
-	.string "PROF. BIRCH is his name.\p"
-	.string "He lives right next door, so you should\n"
-	.string "go over and introduce yourself.$"
-
 PlayersHouse_1F_Text_SeeYouHoney:
 	.string "MOM: See you, honey!$"
 

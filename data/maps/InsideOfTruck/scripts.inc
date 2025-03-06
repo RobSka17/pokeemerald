@@ -6,7 +6,7 @@ InsideOfTruck_MapScripts::
 InsideOfTruck_OnLoad:
 	setmetatile 4, 1, METATILE_InsideOfTruck_ExitLight_Top, FALSE
 	setmetatile 4, 2, METATILE_InsideOfTruck_ExitLight_Mid, FALSE
-	setmetatile 4, 3, METATILE_InsideOfTruck_ExitLight_Bottom, FALSE
+	setmetatile 4, 3, METATILE_InsideOfTruck_ExitLight_Bottom, FALSE,
 	end
 
 InsideOfTruck_OnResume:
@@ -22,6 +22,7 @@ InsideOfTruck_EventScript_SetIntroFlags::
 	end
 
 InsideOfTruck_EventScript_SetIntroFlagsMale::
+	setvar VAR_BIRCH_LAB_STATE, 1
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F
 	setvar VAR_LITTLEROOT_INTRO_STATE, 1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
@@ -36,6 +37,7 @@ InsideOfTruck_EventScript_SetIntroFlagsMale::
 	end
 
 InsideOfTruck_EventScript_SetIntroFlagsFemale::
+	setvar VAR_BIRCH_LAB_STATE, 1
 	setrespawn HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F
 	setvar VAR_LITTLEROOT_INTRO_STATE, 2
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM

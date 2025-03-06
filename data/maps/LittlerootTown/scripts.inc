@@ -2,6 +2,7 @@
 .set LOCALID_MOM, 4
 .set LOCALID_RIVAL, 7
 .set LOCALID_BIRCH, 8
+.set LOCALID_BOY, 3
 
 LittlerootTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
@@ -43,7 +44,6 @@ LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
 	call Common_EventScript_SetupRivalGfxId
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveMomToMaysDoor
-	call_if_unset FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_SetTwinPos
 	call_if_eq VAR_LITTLEROOT_TOWN_STATE, 3, LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_MAY, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
 	call_if_eq VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 4, LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent
@@ -77,17 +77,6 @@ LittlerootTown_EventScript_SetExitedHouseAfterLatiSSTicketEvent::
 
 LittlerootTown_EventScript_MoveMomToMaysDoor::
 	setobjectxyperm LOCALID_MOM, 14, 8
-	return
-
-LittlerootTown_EventScript_SetTwinPos::
-	goto_if_eq VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_SetTwinGuardingRoutePos
-	setobjectxyperm LOCALID_TWIN, 10, 1
-	setobjectmovementtype LOCALID_TWIN, MOVEMENT_TYPE_FACE_UP
-	return
-
-LittlerootTown_EventScript_SetTwinGuardingRoutePos::
-	setobjectxyperm LOCALID_TWIN, 7, 2
-	setobjectmovementtype LOCALID_TWIN, MOVEMENT_TYPE_FACE_DOWN
 	return
 
 LittlerootTown_EventScript_SetMomStandingInFrontOfDoorPos::
@@ -251,28 +240,26 @@ LittlerootTown_EventScript_FatMan::
 	end
 
 LittlerootTown_EventScript_Boy::
-	msgbox LittlerootTown_Text_BirchSpendsDaysInLab, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox LittlerootTown_Text_KirliaIsPopular, MSGBOX_NPC
+	applymovement LOCALID_BOY, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
 	end
 
 LittlerootTown_EventScript_Twin::
 	lock
 	faceplayer
-	goto_if_set FLAG_ADVENTURE_STARTED, LittlerootTown_EventScript_GoodLuck
-	goto_if_set FLAG_RESCUED_BIRCH, LittlerootTown_EventScript_YouSavedBirch
-	goto_if_ne VAR_LITTLEROOT_TOWN_STATE, 0, LittlerootTown_EventScript_GoSaveBirch
-	msgbox LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut, MSGBOX_DEFAULT
+	msgbox LittlerootTown_Text_ZigzagoonIsSoft, MSGBOX_NPC
+	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
+	waitmovement 0
 	release
 	end
 
-LittlerootTown_EventScript_GoSaveBirch::
-	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	setvar VAR_LITTLEROOT_TOWN_STATE, 2
-	release
-	end
+LittlerootTown_Text_ZigzagoonIsSoft:
+	.string "ZIGZAGOON's fur is so soft!\p"
+	.string "I love hugging him!$"
 
 LittlerootTown_EventScript_YouSavedBirch::
 	special GetPlayerBigGuyGirlString
@@ -377,21 +364,6 @@ LittlerootTown_Movement_TwinReturnRight:
 	walk_in_place_faster_down
 	step_end
 
-LittlerootTown_EventScript_GoSaveBirchTrigger::
-	lockall
-	applymovement LOCALID_TWIN, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	special GetPlayerBigGuyGirlString
-	msgbox LittlerootTown_Text_CanYouGoSeeWhatsHappening, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_TWIN, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	setvar VAR_LITTLEROOT_TOWN_STATE, 2
-	releaseall
-	end
-
 LittlerootTown_EventScript_TownSign::
 	msgbox LittlerootTown_Text_TownSign, MSGBOX_SIGN
 	end
@@ -434,63 +406,6 @@ LittlerootTown_EventScript_PlayersHouseSignFemale::
 
 LittlerootTown_EventScript_WarningSign::
 	msgbox LittlerootTown_Text_WarningSign, MSGBOX_SIGN
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger0::
-	lockall
-	setvar VAR_0x8008, 0
-	setobjectxy LOCALID_MOM, 10, 9
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger1::
-	lockall
-	setvar VAR_0x8008, 1
-	setobjectxy LOCALID_MOM, 11, 9
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger2::
-	lockall
-	setvar VAR_0x8008, 2
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger3::
-	lockall
-	setvar VAR_0x8008, 3
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger4::
-	lockall
-	setvar VAR_0x8008, 4
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger5::
-	lockall
-	setvar VAR_0x8008, 5
-	goto LittlerootTown_EventScript_GiveRunningShoesTrigger
-	end
-
-LittlerootTown_EventScript_GiveRunningShoesTrigger::
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomNoticePlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomNoticePlayerFemale
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetHomeDoorCoordsMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetHomeDoorCoordsFemale
-	msgbox LittlerootTown_Text_WaitPlayer, MSGBOX_DEFAULT
-	closemessage
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomApproachPlayerMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomApproachPlayerFemale
-	call LittlerootTown_EventScript_GiveRunningShoes
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_MomReturnHomeMale
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_MomReturnHomeFemale
-	goto LittlerootTown_EventScript_SetReceivedRunningShoes
 	end
 
 LittlerootTown_EventScript_SetHomeDoorCoordsMale::
@@ -968,16 +883,17 @@ LittlerootTown_Text_ComeHomeIfAnythingHappens:
 	.string "Go on, go get them, honey!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
-	.string "If you use a PC, you can store items\n"
-	.string "and POKéMON.\p"
-	.string "The power of science is staggering!$"
+	.string "The HOENN region is changing but\n"
+	.string "BIRCH is helping a lot.\p"
+	.string "He set up a whole new scheme.\p"
+	.string "It's dedicated to preparing\n"
+	.string "the next generation of trainers.$"
 
-LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "PROF. BIRCH spends days in his LAB\n"
-	.string "studying, then he'll suddenly go out in\l"
-	.string "the wild to do more research…\p"
-	.string "When does PROF. BIRCH spend time\n"
-	.string "at home?$"
+LittlerootTown_Text_KirliaIsPopular:
+	.string "KIRLIA is really popular with the\n"
+	.string "kids in the PROFESSOR's programme.\p"
+	.string "It's very sensitive to human\n"
+	.string "emotions.$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Um, um, um!\p"
@@ -987,15 +903,6 @@ LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
 	.string "It's dangerous if you don't have\n"
 	.string "your own POKéMON.$"
-
-LittlerootTown_Text_CanYouGoSeeWhatsHappening:
-	.string "Um, hi!\p"
-	.string "There are scary POKéMON outside!\n"
-	.string "I can hear their cries!\p"
-	.string "I want to go see what's going on,\n"
-	.string "but I don't have any POKéMON…\p"
-	.string "Can you go see what's happening\n"
-	.string "for me?$"
 
 LittlerootTown_Text_YouSavedBirch:
 	.string "You saved PROF. BIRCH!\n"
@@ -1016,8 +923,8 @@ LittlerootTown_Text_PlayersHouse:
 	.string "{PLAYER}'s HOUSE$"
 
 LittlerootTown_Text_WarningSign:
-	.string "Warning! Increase in aggressive\n"
-	.string "wild POKéMON in the area.$"
+	.string "WARNING! INCREASE IN AGGRESSIVE\n"
+	.string "WILD POKéMON IN THE AREA.$"
 
 LittlerootTown_Text_ProfBirchsHouse:
 	.string "PROF. BIRCH'S HOUSE$"

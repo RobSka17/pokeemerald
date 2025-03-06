@@ -4,6 +4,8 @@
 .set LOCALID_BALL_CYNDAQUIL, 4
 .set LOCALID_BALL_TOTODILE, 5
 .set LOCALID_BALL_CHIKORITA, 6
+.set LOCALID_AIDE3, 7
+.set LOCALID_AIDE2, 10
 
 LittlerootTown_ProfessorBirchsLab_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_ProfessorBirchsLab_OnTransition
@@ -273,6 +275,85 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
 	walk_up
 	step_end
 
+LittlerootTown_ProfessorBirchsLab_EventScript_Aide2::
+	lock
+	faceplayer
+	goto_if_eq VAR_BIRCH_LAB_STATE, 1, LittlerootTown_ProfessorBirchLab_EventScript_Aide2BirchNotHere
+	goto_if_eq VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchLab_EventScript_Aide2ThanksForHelping
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide2Default, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchLab_EventScript_Aide2ThanksForHelping:
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide2ThanksForHelping, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchLabText_Aide2ThanksForHelping:
+	.string "Thanks for helping the PROFESSOR!\p"
+	.string "It really is getting more dangerous\n"
+	.string "to go into wild POKéMON habitats.$"
+
+LittlerootTown_ProfessorBirchLab_EventScript_Aide2BirchNotHere:
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide2BirchNotHere, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchLabText_Aide2BirchNotHere:
+	.string "The PROFESSOR? I'm afraid he isn't here.\p"
+	.string "Come to think of it, I thought he'd be\n"
+	.string "back by now.$"
+
+LittlerootTown_ProfessorBirchLabText_Aide2Default:
+	.string "More and more young people are getting\n"
+	.string "involved in BIRCH's youth scheme.\p"
+	.string "It's important the changing world\n"
+	.string "doesn't put off new young trainers.$"
+
+LittlerootTown_ProfessorBirchLab_EventScript_Aide3::
+	lock
+	goto_if_eq VAR_BIRCH_LAB_STATE, 1, LittlerootTown_ProfessorBirchLab_EventScript_Aide3AsYouCanSee
+	goto_if_eq VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchLab_EventScript_Aide3YouReallyHelped
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide3Default, MSGBOX_DEFAULT
+	applymovement LOCALID_AIDE3, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+
+LittlerootTown_ProfessorBirchLab_EventScript_Aide3AsYouCanSee:
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide3AsYouCanSee, MSGBOX_DEFAULT
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide3HmmProfBirch, MSGBOX_DEFAULT
+	applymovement LOCALID_AIDE3, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+LittlerootTown_ProfessorBirchLabText_Aide3AsYouCanSee:
+	.string "So, as you can see, some POKéMON have\n"
+	.string "two types. That means that...$"
+
+LittlerootTown_ProfessorBirchLabText_Aide3HmmProfBirch:
+	.string "Hmm? PROFESSOR BIRCH?\p"
+	.string "I haven't seen him in a while.$"
+
+LittlerootTown_ProfessorBirchLab_EventScript_Aide3YouReallyHelped:
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchLabText_Aide3YouReallyHelped, MSGBOX_DEFAULT
+	applymovement LOCALID_AIDE3, Common_Movement_FaceOriginalDirection
+	waitmovement 0
+	release
+	end
+
+LittlerootTown_ProfessorBirchLabText_Aide3YouReallyHelped:
+	.string "You really helped the PROFESSOR!$"
+
+LittlerootTown_ProfessorBirchLabText_Aide3Default:
+	.string "The PROFESSOR is leading HOENN's\n"
+	.string "efforts to educate children.$"
+
 LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
 	lock
 	faceplayer
@@ -292,6 +373,31 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo, MSGBOX_DEFAULT
 	release
 	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Girl::
+	lock
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchsLabText_Girl, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLabText_Girl:
+	.string "POKéMON are so interesting!\p"
+	.string "I can't wait to go on my own\n"
+	.string "journey with them!$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_Boy::
+	lock
+	faceplayer
+	msgbox LittlerootTown_ProfessorBirchsLabText_Boy, MSGBOX_DEFAULT
+	release
+	end
+
+LittlerootTown_ProfessorBirchsLabText_Boy:
+	.string "I want to become a POKéMON\n"
+	.string "trainer one day.\p"
+	.string "But there sure is a lot to\n"
+	.string "study!$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Cyndaquil::
 	release
@@ -652,7 +758,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Bookshelf::
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_Book::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead, MSGBOX_SIGN
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_Book, MSGBOX_SIGN
 	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
@@ -819,8 +925,9 @@ LittlerootTown_ProfessorBirchsLab_Text_PCUsedForResearch:
 LittlerootTown_ProfessorBirchsLab_Text_CrammedWithBooksOnPokemon:
 	.string "It's crammed with books on POKéMON.$"
 
-LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead:
-	.string "It's a book that's too hard to read.$"
+LittlerootTown_ProfessorBirchsLab_Text_Book:
+	.string "It's a book on POKéMON. It's full of\n"
+	.string "dense language.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational:
 	.string "PROF. BIRCH: Now…\p"
