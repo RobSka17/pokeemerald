@@ -209,6 +209,14 @@ static const struct WarpData sDummyWarpData =
     .y = -1,
 };
 
+static const struct WarpData sRoute101WarpData =
+{
+    .mapGroup = MAP_GROUP(ROUTE101),
+    .mapNum = MAP_NUM(ROUTE101),
+    .x = 8,
+    .y = 15,
+};
+
 static const u32 sUnusedData[] =
 {
     1200, 3600, 1200, 2400, 50, 80, -44, 44
@@ -362,6 +370,21 @@ void DoWhiteOut(void)
     HealPlayerParty();
     Overworld_ResetStateAfterWhiteOut();
     SetWarpDestinationToLastHealLocation();
+    WarpIntoMap();
+}
+
+void DoWhiteOutSaveBirch(void)
+{
+    RunScriptImmediately(EventScript_WhiteOut);
+    HealPlayerParty();
+    Overworld_ResetStateAfterWhiteOut();
+    sWarpDestination = sRoute101WarpData;
+    FlagSet(FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG);
+    FlagSet(FLAG_HIDE_ROUTE_101_POOCHYENA_1);
+    FlagSet(FLAG_HIDE_ROUTE_101_POOCHYENA_2);
+    FlagSet(FLAG_HIDE_ROUTE_101_POOCHYENA_3);
+    FlagClear(FLAG_HIDE_ROUTE_101_RIVAL);
+    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
     WarpIntoMap();
 }
 
@@ -1557,6 +1580,28 @@ void CB2_WhiteOut(void)
         StopMapMusic();
         ResetSafariZoneFlag_();
         DoWhiteOut();
+        ResetInitialPlayerAvatarState();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
+        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+        state = 0;
+        DoMapLoadLoop(&state);
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_WhiteOut_SaveBirch(void)
+{
+    u8 state;
+
+    if (++gMain.state >= 120)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        StopMapMusic();
+        ResetSafariZoneFlag_();
+        DoWhiteOutSaveBirch();
         ResetInitialPlayerAvatarState();
         ScriptContext_Init();
         UnlockPlayerFieldControls();

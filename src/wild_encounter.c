@@ -265,26 +265,87 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
     return wildMonIndex;
 }
 
+static const u16 sBadgeFlags[NUM_BADGES] =
+{
+    FLAG_BADGE01_GET,
+    FLAG_BADGE02_GET,
+    FLAG_BADGE03_GET,
+    FLAG_BADGE04_GET,
+    FLAG_BADGE05_GET,
+    FLAG_BADGE06_GET,
+    FLAG_BADGE07_GET,
+    FLAG_BADGE08_GET,
+};
+
+static int GetNumOwnedBadges(void)
+{
+    u32 i;
+
+    for (i = 0; i < NUM_BADGES; i++)
+    {
+        if (!FlagGet(sBadgeFlags[i]))
+            break;
+    }
+
+    return i;
+}
+
+static u8 GetLevelCutoffByBadges(void)
+{
+    int numOwnedBadges = GetNumOwnedBadges();
+
+    if(numOwnedBadges == 8) return 60;
+    if(numOwnedBadges == 7) return 54;
+    if(numOwnedBadges == 6) return 50;
+    if(numOwnedBadges == 5) return 44;
+    if(numOwnedBadges == 4) return 40;
+    if(numOwnedBadges == 3) return 34;
+    if(numOwnedBadges == 2) return 30;
+    if(numOwnedBadges == 1) return 24;
+    return 20;
+}
+
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
     u8 min;
     u8 max;
     u8 range;
     u8 rand;
+    u8 levelAdd;
+    u8 increasedLevel;
+    u8 levelCutoff = GetLevelCutoffByBadges();
 
-    // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    // NOTE: Changed so wild lievels scale with number of badges obtained
+    // Still allows for a max level cap
+
+    min = wildPokemon->minLevel;
+    // This is to allow for wild Pokémon that are always the same level
+    if(wildPokemon->maxLevel == wildPokemon->minLevel)
     {
-        min = wildPokemon->minLevel;
-        max = wildPokemon->maxLevel;
+        max = min;
     }
     else
     {
-        min = wildPokemon->maxLevel;
-        max = wildPokemon->minLevel;
+        if(levelCutoff > wildPokemon->maxLevel) max = wildPokemon->maxLevel;
+        else max = levelCutoff;
     }
+
     range = max - min + 1;
     rand = Random() % range;
+
+    // Make sure minimum level is less than maximum level
+    // if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    // {
+    //     min = wildPokemon->minLevel;
+    //     max = wildPokemon->maxLevel;
+    // }
+    // else
+    // {
+    //     min = wildPokemon->maxLevel;
+    //     max = wildPokemon->minLevel;
+    // }
+    // range = max - min + 1;
+    // rand = Random() % range;
 
     // check ability for max level mon
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))

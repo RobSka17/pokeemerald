@@ -47,7 +47,6 @@ LittlerootTown_MaysHouse_1F_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 3, LittlerootTown_MaysHouse_1F_EventScript_EnterHouseMovingIn
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 5, LittlerootTown_MaysHouse_1F_EventScript_GoUpstairsToSetClock
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 6, LittlerootTown_MaysHouse_1F_EventScript_StartComeDownFromRoom
-	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_BRENDAN, 1, LittlerootTown_MaysHouse_1F_EventScript_YoureNewNeighbor
 	map_script_2 VAR_LITTLEROOT_HOUSES_STATE_MAY, 3, PlayersHouse_1F_EventScript_GetSSTicketAndSeeLatiTV
 	.2byte 0
 
@@ -108,17 +107,6 @@ LittlerootTown_MaysHouse_1F_Movement_RivalMomApproach:
 	walk_left
 	step_end
 
-RivalsHouse_1F_EventScript_RivalMom::
-	lock
-	faceplayer
-	goto_if_set FLAG_DEFEATED_RIVAL_ROUTE103, RivalsHouse_1F_EventScript_GoHomeEverySoOften
-	goto_if_set FLAG_SYS_POKEMON_GET, RivalsHouse_1F_EventScript_RivalIsOnRoute103
-	goto_if_eq VAR_LITTLEROOT_RIVAL_STATE, 3, RivalsHouse_1F_EventScript_RivalTooBusy
-	special GetRivalSonDaughterString
-	msgbox RivalsHouse_1F_Text_LikeChildLikeFather, MSGBOX_DEFAULT
-	release
-	end
-
 RivalsHouse_1F_EventScript_RivalTooBusy::
 	msgbox RivalsHouse_1F_Text_TooBusyToNoticeVisit, MSGBOX_DEFAULT
 	release
@@ -131,14 +119,6 @@ RivalsHouse_1F_EventScript_RivalIsOnRoute103::
 
 RivalsHouse_1F_EventScript_GoHomeEverySoOften::
 	msgbox RivalsHouse_1F_Text_ShouldGoHomeEverySoOften, MSGBOX_DEFAULT
-	release
-	end
-
-RivalsHouse_1F_EventScript_RivalSibling::
-	lock
-	faceplayer
-	special GetPlayerBigGuyGirlString
-	msgbox RivalsHouse_1F_Text_DoYouHavePokemon, MSGBOX_DEFAULT
 	release
 	end
 
@@ -397,8 +377,3 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "I'm supposed to go help my dad catch\n"
 	.string "some wild POKéMON.\p"
 	.string "Some other time, okay?$"
-
-RivalsHouse_1F_Text_DoYouHavePokemon:
-	.string "Hi, neighbor!\p"
-	.string "Do you already have your\n"
-	.string "own POKéMON?$"

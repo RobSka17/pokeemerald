@@ -1,3 +1,27 @@
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalLittlerootTown1Bulbasaur[] = {
+    {
+        .iv = 150,
+        .lvl = 5,
+        .species = SPECIES_TORCHIC
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalLittlerootTown1Cyndaquil[] = {
+    {
+        .iv = 150,
+        .lvl = 5,
+        .species = SPECIES_SQUIRTLE
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_RivalLittlerootTown1Mudkip[] = {
+    {
+        .iv = 150,
+        .lvl = 5,
+        .species = SPECIES_CHIKORITA
+    }
+};
+
 static const struct TrainerMonNoItemDefaultMoves sParty_Sawyer1[] = {
     {
     .iv = 0,

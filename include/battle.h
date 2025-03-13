@@ -743,5 +743,6 @@ extern u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT];
 extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
+u8 InSaveBirchScene(void);
 
 #endif // GUARD_BATTLE_H

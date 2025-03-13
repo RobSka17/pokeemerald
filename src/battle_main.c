@@ -60,6 +60,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "cable_club.h"
+#include "constants/layouts.h"
 
 extern const struct BgTemplate gBattleBgTemplates[];
 extern const struct WindowTemplate *const gBattleWindowTemplates[];
@@ -246,6 +247,12 @@ COMMON_DATA u8 gHealthboxSpriteIds[MAX_BATTLERS_COUNT] = {0};
 COMMON_DATA u8 gMultiUsePlayerCursor = 0;
 COMMON_DATA u8 gNumberOfMovesToChoose = 0;
 COMMON_DATA u8 gBattleControllerData[MAX_BATTLERS_COUNT] = {0}; // Used by the battle controllers to store misc sprite/task IDs for each battler
+
+u8 InSaveBirchScene()
+{
+    if (gMapHeader.mapLayoutId == LAYOUT_ROUTE101 && VarGet(VAR_ROUTE101_STATE) < 3) return TRUE;
+    return FALSE;
+}
 
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
@@ -4075,7 +4082,7 @@ u8 IsRunningFromBattleImpossible(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return BATTLE_RUN_FORBIDDEN;
     }
-    if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
+    if (InSaveBirchScene() == TRUE)
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DONT_LEAVE_BIRCH;
         return BATTLE_RUN_FORBIDDEN;
