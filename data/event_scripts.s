@@ -1058,3 +1058,13 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
 	.include "data/scripts/rivals_house.inc"
+
+	.include "data/maps/CelestialCavern_1F/scripts.inc"
+
+	.include "data/maps/CelestialCavern_B1F/scripts.inc"
+
+	.include "data/maps/CelestialCavern_B2F_1R/scripts.inc"
+
+	.include "data/maps/CelestialCavern_B2F_2R/scripts.inc"
+
+	.include "data/maps/CelestialCavern_DeoxysRoom/scripts.inc"

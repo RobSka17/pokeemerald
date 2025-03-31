@@ -429,7 +429,12 @@
     "TerraCave_Entrance",
     "TerraCave_End",
     "AlteringCave",
-    "MeteorFalls_StevensCave"
+    "MeteorFalls_StevensCave",
+    "CelestialCavern_1F",
+    "CelestialCavern_B1F",
+    "CelestialCavern_B2F_1R",
+    "CelestialCavern_B2F_2R",
+    "CelestialCavern_DeoxysRoom"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

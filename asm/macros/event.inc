@@ -1949,3 +1949,8 @@
 	setvar VAR_0x8006, \item
 	special CreateEnemyEventMon
 	.endm
+
+	@ Gets the number of badges obtained by player
+	.macro getnumbadges
+	.byte SCR_OP_GETNUMBADGES
+	.endm

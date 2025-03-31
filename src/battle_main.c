@@ -254,6 +254,13 @@ u8 InSaveBirchScene()
     return FALSE;
 }
 
+u8 InRivalFirstBattleScene()
+{
+    u16 littlerootTownState = VarGet(VAR_LITTLEROOT_TOWN_STATE);
+    if (gMapHeader.mapLayoutId == LAYOUT_LITTLEROOT_TOWN && (littlerootTownState > 1 && littlerootTownState < 5)) return TRUE;
+    return FALSE;
+}
+
 static const struct ScanlineEffectParams sIntroScanlineParams16Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_16BIT, 1

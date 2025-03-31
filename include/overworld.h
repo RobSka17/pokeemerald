@@ -134,6 +134,7 @@ void SetUnusedCallback(void *func);
 void CB2_NewGame(void);
 void CB2_WhiteOut(void);
 void CB2_WhiteOut_SaveBirch(void);
+void CB2_WhiteOut_RivalFirstBattle(void);
 void CB2_LoadMap(void);
 void CB2_ReturnToFieldContestHall(void);
 void CB2_ReturnToFieldCableClub(void);

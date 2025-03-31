@@ -6,6 +6,7 @@
 .set LOCALID_ZIGZAGOON, 9
 .set LOCALID_WOMAN, 10
 .set LOCALID_KIRLIA, 11
+.set LOCALID_RIVAL2, 12
 
 LittlerootTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, LittlerootTown_OnTransition
@@ -45,12 +46,28 @@ LittlerootTown_MapScripts::
 
 LittlerootTown_OnTransition:
 	setflag FLAG_VISITED_LITTLEROOT_TOWN
-	call Common_EventScript_SetupRivalGfxId
+	call LittlerootTown_EventScript_SetupRivalGfxId
 	call_if_eq VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_MoveMomToMaysDoor
 	end
 
 LittlerootTown_OnWarp:
 	.2byte 0
+
+LittlerootTown_EventScript_SetupRivalGfxId::
+	checkplayergender
+	goto_if_eq VAR_RESULT, MALE, LittlerootTown_EventScript_SetupRivalGfxIdFemale
+	goto_if_eq VAR_RESULT, FEMALE, LittlerootTown_EventScript_SetupRivalGfxIdMale
+	end
+
+LittlerootTown_EventScript_SetupRivalGfxIdFemale::
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL
+	return
+
+LittlerootTown_EventScript_SetupRivalGfxIdMale::
+	setvar VAR_OBJ_GFX_ID_0, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	setvar VAR_OBJ_GFX_ID_1, OBJ_EVENT_GFX_RIVAL_BRENDAN_NORMAL
+	return
 
 LittlerootTown_EventScript_MoveMomToMaysDoor::
 	setobjectxyperm LOCALID_MOM, 14, 8
@@ -67,6 +84,7 @@ LittlerootTown_EventScript_SetMomInFrontOfDoorFemale::
 LittlerootTown_OnFrame:
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 1, LittlerootTown_EventScript_StepOffTruckMale
 	map_script_2 VAR_LITTLEROOT_INTRO_STATE, 2, LittlerootTown_EventScript_StepOffTruckFemale
+	map_script_2 VAR_LITTLEROOT_TOWN_STATE, 4, LittlerootTown_EventScript_SetUpAfterRivalFirstBattleLost
 	.2byte 0
 
 LittlerootTown_EventScript_StepOffTruckMale::
@@ -352,7 +370,7 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 
 LittlerootTown_EventScript_TriggerRivalFirstBattleLeft::
 	lock
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	msgbox LittlerootTown_Text_RivalStopPlayerFirstBattle, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
@@ -388,7 +406,7 @@ LittlerootTown_Movement_RivalFirstBattleLeftMove:
 
 LittlerootTown_EventScript_TriggerRivalFirstBattleRight::
 	lock
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
 	msgbox LittlerootTown_Text_RivalStopPlayerFirstBattle, MSGBOX_DEFAULT
 	closemessage
 	checkplayergender
@@ -431,7 +449,7 @@ LittlerootTown_EventScript_RivalFirstBattleMayCyndaquil:
 	end
 
 LittlerootTown_EventScript_RivalFirstBattleMayMudkip:
-	trainerbattle_no_intro TRAINER_MAY_LITTLEROOT_CYNDAQUIL, LittlerootTown_Text_RivalFirstBattleDefeated
+	trainerbattle_no_intro TRAINER_MAY_LITTLEROOT_MUDKIP, LittlerootTown_Text_RivalFirstBattleDefeated
 	goto LittlerootTown_EventScript_RivalAfterFirstBattle
 	end
 
@@ -453,7 +471,7 @@ LittlerootTown_EventScript_RivalFirstBattleBrendanCyndaquil:
 	end
 
 LittlerootTown_EventScript_RivalFirstBattleBrendanMudkip:
-	trainerbattle_no_intro TRAINER_BRENDAN_LITTLEROOT_CYNDAQUIL, LittlerootTown_Text_RivalFirstBattleDefeated
+	trainerbattle_no_intro TRAINER_BRENDAN_LITTLEROOT_MUDKIP, LittlerootTown_Text_RivalFirstBattleDefeated
 	goto LittlerootTown_EventScript_RivalAfterFirstBattle
 	end
 
@@ -476,20 +494,38 @@ LittlerootTown_Text_RivalFirstBattleDefeated:
 LittlerootTown_EventScript_RivalAfterFirstBattle:
 	specialvar VAR_RESULT, GetBattleOutcome
 	call_if_eq VAR_RESULT, B_OUTCOME_WON, LittlerootTown_EventScript_RivalAfterFirstBattleWon
-	call_if_eq VAR_RESULT, B_OUTCOME_LOST, LittlerootTown_EventScript_RivalAfterFirstBattleLost
+	goto LittlerootTown_EventScript_GivePlayerItems
+	end
+
+LittlerootTown_EventScript_GivePlayerItems:
 	giveitem ITEM_POKE_BALL 10
 	msgbox LittlerootTown_Text_RivalGivePotion, MSGBOX_DEFAULT
 	giveitem ITEM_POTION
 	msgbox LittlerootTown_Text_RivalFirstBattleLeave, MSGBOX_DEFAULT
 	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalFirstBattleLeave
+	applymovement LOCALID_RIVAL2, LittlerootTown_Movement_RivalFirstBattleLeave
 	waitmovement 0
-	removeobject LOCALID_RIVAL
+	removeobject LOCALID_RIVAL2
 	playbgm MUS_LITTLEROOT, TRUE
 	release
 	end
 
+LittlerootTown_EventScript_SetUpAfterRivalFirstBattleLost:
+	setvar VAR_LITTLEROOT_TOWN_STATE, 5
+	setobjectxy LOCALID_RIVAL, 10, 2
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_PlayMayTheme
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_PlayBrendanTheme
+	call LittlerootTown_EventScript_RivalAfterFirstBattleLost
+	goto LittlerootTown_EventScript_GivePlayerItems
+	end
+
 LittlerootTown_EventScript_RivalAfterFirstBattleWon:
+	setvar VAR_LITTLEROOT_TOWN_STATE, 5
 	msgbox LittlerootTown_Text_RivalAfterFirstBattleWon, MSGBOX_DEFAULT
 	return
 
@@ -520,7 +556,7 @@ LittlerootTown_Text_RivalAfterFirstBattleLost:
 	.string "I'm going to catch a bunch of\n"
 	.string "POKéMON from all over HOENN.\p"
 	.string "You'd better go out and catch\n"
-	.string "some more too.$"
+	.string "some more too. Take these.$"
 
 LittlerootTown_Text_RivalGivePotion:
 	.string "I'm not going to be around to\n"

@@ -1,0 +1,41 @@
+{
+  "id": "MAP_CELESTIAL_CAVERN_B2F_1R",
+  "name": "CelestialCavern_B2F_1R",
+  "layout": "LAYOUT_CELESTIAL_CAVERN_B2F_1R",
+  "music": "MUS_WEATHER_GROUDON",
+  "region_map_section": "MAPSEC_CELESTIAL_CAVERN",
+  "requires_flash": false,
+  "weather": "WEATHER_FOG_HORIZONTAL",
+  "map_type": "MAP_TYPE_UNDERGROUND",
+  "allow_cycling": false,
+  "allow_escaping": true,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": 0,
+  "object_events": [
+
+  ],
+  "warp_events": [
+    {
+      "x": 25,
+      "y": 3,
+      "elevation": 0,
+      "dest_map": "MAP_CELESTIAL_CAVERN_B1F",
+      "dest_warp_id": "1"
+    },
+    {
+      "x": 8,
+      "y": 6,
+      "elevation": 0,
+      "dest_map": "MAP_CELESTIAL_CAVERN_B2F_2R",
+      "dest_warp_id": "0"
+    }
+  ],
+  "coord_events": [
+
+  ],
+  "bg_events": [
+
+  ]
+}

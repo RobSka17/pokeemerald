@@ -744,5 +744,6 @@ extern u8 gMultiUsePlayerCursor;
 extern u8 gNumberOfMovesToChoose;
 extern u8 gBattleControllerData[MAX_BATTLERS_COUNT];
 u8 InSaveBirchScene(void);
+u8 InRivalFirstBattleScene(void);
 
 #endif // GUARD_BATTLE_H

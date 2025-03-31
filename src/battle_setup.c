@@ -1334,6 +1334,8 @@ static void CB2_EndTrainerBattle(void)
     {
         if (InBattlePyramid() || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        else if(InRivalFirstBattleScene() == TRUE)
+            SetMainCallback2(CB2_WhiteOut_RivalFirstBattle);
         else
             SetMainCallback2(CB2_WhiteOut);
     }

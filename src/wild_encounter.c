@@ -302,7 +302,7 @@ static u8 GetLevelCutoffByBadges(void)
     if(numOwnedBadges == 3) return 34;
     if(numOwnedBadges == 2) return 30;
     if(numOwnedBadges == 1) return 24;
-    return 20;
+    return 1;
 }
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
@@ -315,10 +315,11 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     u8 increasedLevel;
     u8 levelCutoff = GetLevelCutoffByBadges();
 
-    // NOTE: Changed so wild lievels scale with number of badges obtained
+    // NOTE: Changed so wild levels scale with number of badges obtained
     // Still allows for a max level cap
 
-    min = wildPokemon->minLevel;
+    if(wildPokemon->minLevel <= levelCutoff) min = wildPokemon->minLevel;
+    else min = levelCutoff;
     // This is to allow for wild Pokémon that are always the same level
     if(wildPokemon->maxLevel == wildPokemon->minLevel)
     {

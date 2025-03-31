@@ -213,8 +213,18 @@ static const struct WarpData sRoute101WarpData =
 {
     .mapGroup = MAP_GROUP(ROUTE101),
     .mapNum = MAP_NUM(ROUTE101),
+    .warpId = WARP_ID_NONE,
     .x = 8,
     .y = 15,
+};
+
+static const struct WarpData sLittlerootWarpData =
+{
+    .mapGroup = MAP_GROUP(LITTLEROOT_TOWN),
+    .mapNum = MAP_NUM(LITTLEROOT_TOWN),
+    .warpId = WARP_ID_NONE,
+    .x = 11,
+    .y = 2,
 };
 
 static const u32 sUnusedData[] =
@@ -385,6 +395,17 @@ void DoWhiteOutSaveBirch(void)
     FlagSet(FLAG_HIDE_ROUTE_101_POOCHYENA_3);
     FlagClear(FLAG_HIDE_ROUTE_101_RIVAL);
     FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH);
+    WarpIntoMap();
+}
+
+void DoWhiteOutRivalFirstBattle(void)
+{
+    RunScriptImmediately(EventScript_WhiteOut);
+    HealPlayerParty();
+    Overworld_ResetStateAfterWhiteOut();
+    VarSet(VAR_LITTLEROOT_TOWN_STATE, 4);
+    FlagClear(FLAG_HIDE_LITTLEROOT_TOWN_RIVAL2);
+    sWarpDestination = sLittlerootWarpData;
     WarpIntoMap();
 }
 
@@ -1599,9 +1620,30 @@ void CB2_WhiteOut_SaveBirch(void)
     if (++gMain.state >= 120)
     {
         FieldClearVBlankHBlankCallbacks();
-        StopMapMusic();
         ResetSafariZoneFlag_();
         DoWhiteOutSaveBirch();
+        ResetInitialPlayerAvatarState();
+        ScriptContext_Init();
+        UnlockPlayerFieldControls();
+        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+        state = 0;
+        DoMapLoadLoop(&state);
+        SetFieldVBlankCallback();
+        SetMainCallback1(CB1_Overworld);
+        SetMainCallback2(CB2_Overworld);
+    }
+}
+
+void CB2_WhiteOut_RivalFirstBattle(void)
+{
+    u8 state;
+
+    if (++gMain.state >= 120)
+    {
+        FieldClearVBlankHBlankCallbacks();
+        StopMapMusic();
+        ResetSafariZoneFlag_();
+        DoWhiteOutRivalFirstBattle();
         ResetInitialPlayerAvatarState();
         ScriptContext_Init();
         UnlockPlayerFieldControls();
