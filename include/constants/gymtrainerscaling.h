@@ -1,0 +1,1 @@
+#define GYM_TRAINERS_COUNT                  7

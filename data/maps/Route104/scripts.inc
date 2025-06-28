@@ -22,8 +22,9 @@ Route104_EventScript_WoodsGuard::
 	faceplayer
 	goto_if_ge VAR_ROUTE104_STATE, 1, Route104_EventScript_WoodsGuard_SkipBadgeCheck
 	msgbox Route104_Text_WoodsGuard, MSGBOX_NPC
-	getnumbadges
-	goto_if_ge VAR_RESULT, 1, Route104_EventScript_WoodsGuard_HasBadge
+	closemessage
+	delay 120
+	goto_if_ge VAR_NUMBER_OF_BADGES_OWNED, 1, Route104_EventScript_WoodsGuard_HasBadge
 	msgbox Route104_Text_WoodsGuardDoesNotHaveBadge, MSGBOX_NPC
 	release
 	end
@@ -45,8 +46,9 @@ Route104_EventScript_WoodsGuard_HasBadge:
 	end
 
 Route104_Text_WoodsGuard:
-	.string "Hi there, trainer! The new initiative from\n"
-	.string "DEVON CORP. includes new safety checks.\p"
+	.string "Hi there, trainer!\p"
+	.string "The new initiative from DEVON CORP.\n"
+	.string "includes new safety checks.\p"
 	.string "More dangerous BUG POKéMON are making\n"
 	.string "PETALBURG WOODS their home recently.\p"
 	.string "We're asking trainers to prove they've\n"
