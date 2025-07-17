@@ -21,7 +21,7 @@ PetalburgCity_Gym_Test:
 	givemon SPECIES_POOCHYENA, 28
 	givemon SPECIES_KADABRA, 28
 	givemon SPECIES_MACHOKE, 28
-	setvar VAR_NUMBER_OF_BADGES_OWNED, 2
+	setvar VAR_NUMBER_OF_BADGES_OWNED, 0
 	return
 
 PetalburgCity_Gym_EventScript_OpenEntranceDoorsOnEntry:

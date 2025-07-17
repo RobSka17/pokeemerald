@@ -225,6 +225,10 @@ Route101_EventScript_Birch_AfterPoochyenaBattleWon:
 
 Route101_EventScript_Birch_AfterPoochyenaBattleLost:
 	setvar VAR_TEMP_2, 2
+	setflag FLAG_HIDE_ROUTE_101_RIVAL
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_POOCHYENA_BATTLE
+	clearflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCHS_LAB_BIRCH
+	setflag FLAG_HIDE_ROUTE_101_BIRCH_STARTERS_BAG
 	setvar VAR_ROUTE101_STATE, 3
 	clearflag FLAG_HIDE_MAP_NAME_POPUP
 	setvar VAR_BIRCH_LAB_STATE, 2
@@ -286,6 +290,8 @@ Route101_Text_Birch_ThanksPlayer:
 	.string "And thank you, {PLAYER}.\p"
 	.string "If it hadn't been for both your\n"
 	.string "efforts, that could have been bad!\p"
+	.string "The POOCHYENA are more territorial\n"
+	.string "than ever.\p"
 	.string "Let's hurry back to the LAB!$"
 
 Route101_Text_Birch_YouSavedMe:

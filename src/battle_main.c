@@ -2061,7 +2061,6 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                scaledLevel += (partyData[i].lvl - baseMonLevel);
                 monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
