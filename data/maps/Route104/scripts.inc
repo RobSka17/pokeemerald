@@ -15,7 +15,69 @@ Route104_OnFrame:
 	.2byte 0
 
 Route104_OnTransition:
+	call_if_gt VAR_ROUTE104_STATE, 0, Route104_EventScript_MoveWoodsGuards
 	end
+
+Route104_EventScript_Billy::
+	trainerbattle_single TRAINER_BILLY, Route104_Text_BillyIntro, Route104_Text_BillyDefeated
+	msgbox Route104_Text_BillyPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route104_Text_BillyIntro:
+	.string "My POKéMON floats in the sea with\n"
+	.string "me!$"
+
+Route104_Text_BillyDefeated:
+	.string "Awwww...$"
+
+Route104_Text_BillyPostBattle:
+	.string "I like to battle but I like\n"
+	.string "the sea more.$"
+
+Route104_EventScript_Joan::
+	trainerbattle_single TRAINER_JOAN, Route104_Text_JoanIntro, Route104_Text_JoanDefeated
+	msgbox Route104_Text_JoanPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route104_Text_JoanIntro:
+	.string "Isn't the seafront such a\n"
+	.string "charming place for a battle?$"
+
+Route104_Text_JoanDefeated:
+	.string "Simply stunning!$"
+
+Route104_Text_JoanPostBattle:
+	.string "I moved here from VERDANTURF.\p"
+	.string "I hear some popular kid from\n"
+	.string "there used to live here.$"
+
+Route104_EventScript_Kiara::
+	trainerbattle_single TRAINER_KIARA, Route104_Text_KiaraIntro, Route104_Text_KiaraDefeated
+	msgbox Route104_Text_KiaraPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route104_Text_KiaraIntro:
+	.string "Grrr, those guys won't\n"
+	.string "let me into the WOODS.\p"
+	.string "What's up with that?$"
+
+Route104_Text_KiaraDefeated:
+	.string "Too frustrating!$"
+
+Route104_Text_KiaraPostBattle:
+	.string "I gotta keep training!$"
+
+Route104_EventScript_Woman::
+	lock
+	faceplayer
+	msgbox Route104_Text_Woman, MSGBOX_DEFAULT
+	release
+	end
+
+Route104_Text_Woman:
+	.string "My dear BILLY loves the sea.\p"
+	.string "But I heard something in the news\n"
+	.string "about changing conditions.$"
 
 Route104_EventScript_WoodsGuard::
 	lock
@@ -23,7 +85,7 @@ Route104_EventScript_WoodsGuard::
 	goto_if_ge VAR_ROUTE104_STATE, 1, Route104_EventScript_WoodsGuard_SkipBadgeCheck
 	msgbox Route104_Text_WoodsGuard, MSGBOX_NPC
 	closemessage
-	delay 120
+	delay 80
 	goto_if_ge VAR_NUMBER_OF_BADGES_OWNED, 1, Route104_EventScript_WoodsGuard_HasBadge
 	msgbox Route104_Text_WoodsGuardDoesNotHaveBadge, MSGBOX_NPC
 	release
@@ -38,7 +100,7 @@ Route104_EventScript_WoodsGuard_HasBadge:
 	msgbox Route104_Text_WoodsGuardHasBadge, MSGBOX_NPC
 	applymovement OBJ_EVENT_ID_PLAYER, Route104_Movement_PlayerMoveBackFromWoodsGuardSouth
 	waitmovement 0
-	applymovement LOCALID_WOODS_GUARD_1, Route104_Movement_WoodsGuardLeftMoveAwaySouth
+	applymovement LOCALID_WOODS_GUARD_1, Route104_Movement_WoodsGuardRightMoveAwaySouth
 	applymovement LOCALID_WOODS_GUARD_2, Route104_Movement_WoodsGuardLeftMoveAwaySouth
 	waitmovement 0
 	setvar VAR_ROUTE104_STATE, 1
@@ -71,7 +133,6 @@ Route104_Text_WoodsGuardDoesNotHaveBadge:
 
 Route104_Movement_PlayerMoveBackFromWoodsGuardSouth:
 	walk_down
-	walk_down
 	walk_in_place_faster_up
 	step_end
 
@@ -86,6 +147,13 @@ Route104_Movement_WoodsGuardRightMoveAwaySouth:
 	walk_right
 	walk_in_place_faster_down
 	step_end
+
+Route104_EventScript_MoveWoodsGuards::
+	setobjectxyperm LOCALID_WOODS_GUARD_1, 9, 41
+	setobjectxyperm LOCALID_WOODS_GUARD_2, 12, 41
+	setobjectxyperm LOCALID_WOODS_GUARD_3, 9, 27
+	setobjectxyperm LOCALID_WOODS_GUARD_4, 12, 27
+	return
 
 Route104_EventScript_BrineysCottageSign::
 	msgbox Route104_Text_MrBrineysCottage, MSGBOX_SIGN
@@ -108,7 +176,9 @@ Route104_EventScript_TrainerTipsDoubleBattles::
 	end
 
 Route104_Text_MrBrineysCottage:
-	.string "MR. BRINEY'S COTTAGE$"
+	.string "It seems like this used to say\n"
+	.string "something.\p"
+	.string "But the text has been removed.$"
 
 Route104_Text_RouteSignPetalburg:
 	.string "ROUTE 1O4\n"

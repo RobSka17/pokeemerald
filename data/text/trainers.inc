@@ -294,19 +294,6 @@ Route104_Text_IvanPostBattle:
 	.string "I got too into fishing.\n"
 	.string "I forgot I had to raise my POKéMON…$"
 
-Route104_Text_BillyIntro:
-	.string "Leaving footprints in the sand is\n"
-	.string "so fun!$"
-
-Route104_Text_BillyDefeat:
-	.string "Waah! I got sand in my runners!\n"
-	.string "They're all gritty!$"
-
-Route104_Text_BillyPostBattle:
-	.string "I want to leave my footprints in\n"
-	.string "the sand everywhere, but they\l"
-	.string "disappear quickly…$"
-
 Route104_Text_HaleyIntro:
 	.string "Should I…\n"
 	.string "Or shouldn't I?\p"
@@ -1116,35 +1103,6 @@ Route110_Text_JaclynPostBattle:
 	.string "a wonder! Yes, a wonder!\l"
 	.string "Don't think you can win all the time!$"
 
-Route110_Text_EdwinIntro:
-	.string "Could I see your POKéMON?\n"
-	.string "Just one look, please?$"
-
-Route110_Text_EdwinDefeated:
-	.string "I wanted to complete\n"
-	.string "my collection…$"
-
-Route110_Text_EdwinPostBattle:
-	.string "When I see a POKéMON that I don't know,\n"
-	.string "my passion as a collector is ignited!$"
-
-Route110_Text_EdwinRegister:
-	.string "I like collecting MATCH CALL\n"
-	.string "registrations, too…$"
-
-Route110_Text_EdwinRematchIntro:
-	.string "Hi, have you caught any new POKéMON?\p"
-	.string "Could I see your POKéMON?\n"
-	.string "Just one look, please?$"
-
-Route110_Text_EdwinRematchDefeated:
-	.string "Your POKéMON…\n"
-	.string "I envy you.$"
-
-Route110_Text_EdwinRematchPostBattle:
-	.string "Oh, I long to make all rare POKéMON\n"
-	.string "mine!$"
-
 Route110_Text_DaleIntro:
 	.string "Hey!\n"
 	.string "Don't sneak up behind me like that!$"
@@ -1156,46 +1114,6 @@ Route110_Text_DaleDefeated:
 Route110_Text_DalePostBattle:
 	.string "Fishing is all about concentration.\n"
 	.string "You have to focus on the floater.$"
-
-Route110_Text_IsabelIntro:
-	.string "Ahahaha! I would go anywhere to show\n"
-	.string "off my delightful POKéMON.$"
-
-Route110_Text_IsabelDefeated:
-	.string "Oh, dear, this won't do.$"
-
-Route110_Text_IsabelPostBattle:
-	.string "Rather than battling, perhaps I should\n"
-	.string "show off my POKéMON at the FAN CLUB.$"
-
-Route110_Text_IsabelRegister:
-	.string "That wasn't close to what I could\n"
-	.string "do to show off my POKéMON.\p"
-	.string "I'll have you as my captive audience\n"
-	.string "as often as possible!$"
-
-Route110_Text_IsabelRematchIntro:
-	.string "Ahahahaha! I would be happy to show\n"
-	.string "off my POKéMON as often as you like!$"
-
-Route110_Text_IsabelRematchDefeated:
-	.string "Oh, dear, this won't do.$"
-
-Route110_Text_IsabelRematchPostBattle:
-	.string "I don't think that I could ever stop\n"
-	.string "from showing off my POKéMON.\p"
-	.string "But I like to battle, too!$"
-
-Route110_Text_TimmyIntro:
-	.string "I found some cool POKéMON in the grass\n"
-	.string "around here!$"
-
-Route110_Text_TimmyDefeated:
-	.string "Being cool isn't enough to win…$"
-
-Route110_Text_TimmyPostBattle:
-	.string "It's hard to battle with POKéMON you\n"
-	.string "just caught.$"
 
 Route110_Text_AlyssaIntro:
 	.string "I fell off CYCLING ROAD…\p"
@@ -1220,17 +1138,6 @@ Route110_Text_JosephDefeated:
 Route110_Text_JosephPostBattle:
 	.string "This isn't going to bring me down!\n"
 	.string "Losing has made me a better man!$"
-
-Route110_Text_KalebIntro:
-	.string "When cute POKéMON help each other…\n"
-	.string "You won't see a more adorable sight!$"
-
-Route110_Text_KalebDefeated:
-	.string "Have you no compassion or pity?$"
-
-Route110_Text_KalebPostBattle:
-	.string "Okay, okay, you've done the best you\n"
-	.string "could, my pretties.$"
 
 Route111_Text_DrewIntro:
 	.string "Oh, hey! Those GO-GOGGLES suit you.\n"

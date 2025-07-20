@@ -201,11 +201,6 @@ MauvilleCity_Gym_EventScript_Kirk::
 	msgbox MauvilleCity_Gym_Text_KirkPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Shawn::
-	trainerbattle_single TRAINER_SHAWN, MauvilleCity_Gym_Text_ShawnIntro, MauvilleCity_Gym_Text_ShawnDefeat
-	msgbox MauvilleCity_Gym_Text_ShawnPostBattle, MSGBOX_AUTOCLOSE
-	end
-
 MauvilleCity_Gym_EventScript_Ben::
 	trainerbattle_single TRAINER_BEN, MauvilleCity_Gym_Text_BenIntro, MauvilleCity_Gym_Text_BenDefeat
 	msgbox MauvilleCity_Gym_Text_BenPostBattle, MSGBOX_AUTOCLOSE
@@ -216,10 +211,34 @@ MauvilleCity_Gym_EventScript_Vivian::
 	msgbox MauvilleCity_Gym_Text_VivianPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-MauvilleCity_Gym_EventScript_Angelo::
-	trainerbattle_single TRAINER_ANGELO, MauvilleCity_Gym_Text_AngeloIntro, MauvilleCity_Gym_Text_AngeloDefeat
-	msgbox MauvilleCity_Gym_Text_AngeloPostBattle, MSGBOX_AUTOCLOSE
+MauvilleCity_Gym_EventScript_Tea::
+	trainerbattle_single TRAINER_TEA, MauvilleCity_Gym_Text_TeaIntro, MauvilleCity_Gym_Text_TeaDefeat
+	msgbox MauvilleCity_Gym_Text_TeaPostBattle, MSGBOX_AUTOCLOSE
 	end
+
+MauvilleCity_Gym_Text_TeaIntro:
+	.string "We're the electric duo!$"
+
+MauvilleCity_Gym_Text_TeaDefeat:
+	.string "The duo is defeated!$"
+
+MauvilleCity_Gym_Text_TeaPostBattle:
+	.string "Don't think just because you beat\n"
+	.string "us, you can beat WATTSON!$"
+
+MauvilleCity_Gym_EventScript_Lea::
+	trainerbattle_single TRAINER_LEA, MauvilleCity_Gym_Text_LeaIntro, MauvilleCity_Gym_Text_LeaDefeat
+	msgbox MauvilleCity_Gym_Text_LeaPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+MauvilleCity_Gym_Text_LeaIntro:
+	.string "We power each other up!$"
+
+MauvilleCity_Gym_Text_LeaDefeat:
+	.string "We ran out of power!$"
+
+MauvilleCity_Gym_Text_LeaPostBattle:
+	.string "WATTSON's power is electrifying!$"
 
 MauvilleCity_Gym_EventScript_GymGuide::
 	lock
@@ -283,19 +302,6 @@ MauvilleCity_Gym_Text_KirkPostBattle:
 	.string "POKéMON and rock, it's all about heart,\n"
 	.string "whoa-yeah!$"
 
-MauvilleCity_Gym_Text_ShawnIntro:
-	.string "I trained under WATTSON!\n"
-	.string "There ain't no way I'll lose easily!$"
-
-MauvilleCity_Gym_Text_ShawnDefeat:
-	.string "Unplugged and turned off…$"
-
-MauvilleCity_Gym_Text_ShawnPostBattle:
-	.string "WATTSON, our GYM LEADER, has been\n"
-	.string "around for a long, long time.\p"
-	.string "He was battling even before your\n"
-	.string "daddy was born, that tough coot.$"
-
 MauvilleCity_Gym_Text_BenIntro:
 	.string "This GYM's got puzzles!\n"
 	.string "Isn't it fun?$"
@@ -320,17 +326,6 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "He was a TRAINER long before we\n"
 	.string "became TRAINERS.\l"
 	.string "He must know all sorts of things!$"
-
-MauvilleCity_Gym_Text_AngeloIntro:
-	.string "I love shiny things!$"
-
-MauvilleCity_Gym_Text_AngeloDefeat:
-	.string "Oh…\n"
-	.string "My eyes are frazzled…$"
-
-MauvilleCity_Gym_Text_AngeloPostBattle:
-	.string "MAUVILLE GYM's WATTSON has a shiny\n"
-	.string "forehead. It makes me happy!$"
 
 MauvilleCity_Gym_Text_WattsonIntro:
 	.string "I've given up on my plans to convert\n"

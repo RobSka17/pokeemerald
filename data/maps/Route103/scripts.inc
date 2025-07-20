@@ -12,6 +12,41 @@ Route103_OnLoad:
 	call_if_set FLAG_SYS_GAME_CLEAR, Route103_EventScript_OpenAlteringCave
 	end
 
+Route103_EventScript_Mick::
+	trainerbattle_single TRAINER_MICK, Route103_Text_MickIntro, Route103_Text_MickDefeated
+	msgbox Route104_Text_MickPostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route103_Text_MickIntro:
+	.string "Ah, the sailor's life!\n"
+	.string "It's the only one for me!$"
+
+Route103_Text_MickDefeated:
+	.string "Battling can be as treacherous\n"
+	.string "as the sea!$"
+
+Route104_Text_MickPostBattle:
+	.string "I've been sailing my whole life.\p"
+	.string "Nothing beats it!$"
+
+Route103_EventScript_Kyle::
+	trainerbattle_single TRAINER_KYLE, Route103_Text_KyleIntro, Route103_Text_KyleDefeated
+	msgbox Route104_Text_KylePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+Route103_Text_KyleIntro:
+	.string "There are so many POKéMON to\n"
+	.string "see around here!$"
+
+Route103_Text_KyleDefeated:
+	.string "I need to keep looking.$"
+
+Route104_Text_KylePostBattle:
+	.string "Having a team of POKéMON that\n"
+	.string "covers type differences...\p"
+	.string "It's key to succeeding as a\n"
+	.string "trainer.$"
+
 Route103_EventScript_OpenAlteringCave::
 	setmetatile 45, 5, METATILE_General_CaveEntrance_Top, TRUE
 	setmetatile 45, 6, METATILE_General_CaveEntrance_Bottom, FALSE
@@ -23,7 +58,7 @@ Route103_EventScript_HarbourSign::
 
 Route103_Text_HarbourSign:
 	.string "OLDALE RIVER CROSSING\n"
-	.string "{RIGHT_ARROW} MAUVILLE/SLATEPORT$"
+	.string "{RIGHT_ARROW} SLATEPORT$"
 
 Route103_EventScript_HarbourSign2::
 	msgbox Route103_Text_HarbourSign2, MSGBOX_SIGN

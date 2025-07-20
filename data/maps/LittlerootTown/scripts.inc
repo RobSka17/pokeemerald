@@ -3,6 +3,7 @@
 .set LOCALID_RIVAL, 7
 .set LOCALID_BIRCH, 8
 .set LOCALID_BOY, 3
+.set LOCALID_FAT_MAN, 2
 .set LOCALID_ZIGZAGOON, 9
 .set LOCALID_WOMAN, 10
 .set LOCALID_KIRLIA, 11
@@ -183,7 +184,10 @@ LittlerootTown_Movement_PlayerStepOffTruck:
 	step_end
 
 LittlerootTown_EventScript_FatMan::
+	lock
+	faceplayer
 	msgbox LittlerootTown_Text_FatMan, MSGBOX_NPC
+	release
 	end
 
 LittlerootTown_EventScript_Boy::
@@ -494,7 +498,8 @@ LittlerootTown_Text_RivalFirstBattleDefeated:
 LittlerootTown_EventScript_RivalAfterFirstBattle:
 	specialvar VAR_RESULT, GetBattleOutcome
 	call_if_eq VAR_RESULT, B_OUTCOME_WON, LittlerootTown_EventScript_RivalAfterFirstBattleWon
-	goto LittlerootTown_EventScript_GivePlayerItems
+	call LittlerootTown_EventScript_GivePlayerItems
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, LittlerootTown_EventScript_RivalFirstBattleLeave_Won
 	end
 
 LittlerootTown_EventScript_GivePlayerItems:
@@ -503,6 +508,17 @@ LittlerootTown_EventScript_GivePlayerItems:
 	giveitem ITEM_POTION
 	msgbox LittlerootTown_Text_RivalFirstBattleLeave, MSGBOX_DEFAULT
 	closemessage
+	return
+
+LittlerootTown_EventScript_RivalFirstBattleLeave_Won:
+	applymovement LOCALID_RIVAL, LittlerootTown_Movement_RivalFirstBattleLeave
+	waitmovement 0
+	removeobject LOCALID_RIVAL
+	playbgm MUS_LITTLEROOT, TRUE
+	release
+	end
+
+LittlerootTown_EventScript_RivalFirstBattleLeave_Lost:
 	applymovement LOCALID_RIVAL2, LittlerootTown_Movement_RivalFirstBattleLeave
 	waitmovement 0
 	removeobject LOCALID_RIVAL2
@@ -517,15 +533,21 @@ LittlerootTown_EventScript_SetUpAfterRivalFirstBattleLost:
 	waitmovement 0
 	applymovement LOCALID_RIVAL, Common_Movement_WalkInPlaceFasterRight
 	waitmovement 0
+	playfanfare MUS_HEAL
+	waitfanfare
 	checkplayergender
 	call_if_eq VAR_RESULT, MALE, LittlerootTown_PlayMayTheme
 	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_PlayBrendanTheme
 	call LittlerootTown_EventScript_RivalAfterFirstBattleLost
-	goto LittlerootTown_EventScript_GivePlayerItems
+	call LittlerootTown_EventScript_GivePlayerItems
+	goto LittlerootTown_EventScript_RivalFirstBattleLeave_Lost
 	end
 
 LittlerootTown_EventScript_RivalAfterFirstBattleWon:
 	setvar VAR_LITTLEROOT_TOWN_STATE, 5
+	playfanfare MUS_HEAL
+	waitfanfare
+	special HealPlayerParty
 	msgbox LittlerootTown_Text_RivalAfterFirstBattleWon, MSGBOX_DEFAULT
 	return
 
@@ -564,6 +586,10 @@ LittlerootTown_Text_RivalGivePotion:
 	.string "Take this too.$"
 
 LittlerootTown_Text_RivalFirstBattleLeave:
+	.string "Be sure to check out the areas\n"
+	.string "around ROUTES 102 and 103.\p"
+	.string "You'd be surprised how many\n"
+	.string "diverse POKéMON you can find.\p"
 	.string "Okay. I'm going back home to\n"
 	.string "finish preparing.\p"
 	.string "Try not to get too beaten up\n"

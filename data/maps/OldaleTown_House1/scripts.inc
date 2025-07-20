@@ -2,14 +2,25 @@ OldaleTown_House1_MapScripts::
 	.byte 0
 
 OldaleTown_House1_EventScript_Woman::
-	msgbox OldaleTown_House1_Text_LeftPokemonGoesOutFirst, MSGBOX_NPC
+	lock
+	faceplayer
+	msgbox OldaleTown_House1_Text_Woman, MSGBOX_NPC
+	release
 	end
 
-OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "When a POKéMON battle starts, the one\n"
-	.string "at the left of the list goes out first.\p"
-	.string "So, when you get more POKéMON in your\n"
-	.string "party, try switching around the order\l"
-	.string "of your POKéMON.\p"
-	.string "It could give you an advantage.$"
+OldaleTown_House1_Text_Woman:
+	.string "Isn't my AZUMARILL absolutely\n"
+	.string "precious?$"
+
+OldaleTown_House1_EventScript_Azumarill::
+	lock
+	faceplayer
+	playmoncry SPECIES_AZUMARILL, CRY_MODE_NORMAL
+	waitmoncry
+	msgbox OldaleTown_House1_Text_Azumarill, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_House1_Text_Azumarill:
+	.string "AZUUU!$"
 

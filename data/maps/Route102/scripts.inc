@@ -13,49 +13,73 @@ Route102_EventScript_RouteSignPetalburg::
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
 	end
 
-Route102_EventScript_Boy::
-	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
+Route102_EventScript_Jimmy::
+	trainerbattle_single TRAINER_JIMMY, Route102_Text_JimmyIntro, Route102_Text_JimmyDefeated
+	msgbox Route102_Text_JimmyPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_Calvin::
-	trainerbattle_single TRAINER_CALVIN_1, Route102_Text_CalvinIntro, Route102_Text_CalvinDefeated, Route102_EventScript_CalvinRegisterMatchCallAfterBattle
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, Route102_EventScript_CalvinRematch
-	setvar VAR_0x8004, TRAINER_CALVIN_1
-	specialvar VAR_RESULT, IsTrainerRegistered
-	goto_if_eq VAR_RESULT, FALSE, Route102_EventScript_CalvinTryRegister
-	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
-	release
+Route102_Text_JimmyIntro:
+	.string "I caught this POKéMON myself with\n"
+	.string "the POKé BALLS my dad bought!$"
+
+Route102_Text_JimmyDefeated:
+	.string "Nooo, my POKéMON!$"
+
+Route102_Text_JimmyPostBattle:
+	.string "Now I'm gonna have to go home...$"
+
+Route102_EventScript_Liz::
+	trainerbattle_single TRAINER_LIZ, Route102_Text_LizIntro, Route102_Text_LizDefeated
+	msgbox Route102_Text_LizPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_CalvinRegisterMatchCallAfterBattle::
-	special PlayerFaceTrainerAfterBattle
-	waitmovement 0
-	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegisterMatchCall
-	release
+Route102_Text_LizIntro:
+	.string "I love to be outdoors with my\n"
+	.string "dear POKéMON.\p"
+	.string "Don't you love the sweet aromas\n"
+	.string "of nature?$"
+
+Route102_Text_LizDefeated:
+	.string "Oh my...$"
+
+Route102_Text_LizPostBattle:
+	.string "Nature is always so soothing.$"
+
+Route102_EventScript_Ralph::
+	trainerbattle_single TRAINER_RALPH, Route102_Text_RalphIntro, Route102_Text_RalphDefeated
+	msgbox Route102_Text_RalphPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_CalvinRegisterMatchCall::
-	msgbox Route102_Text_CalvinRegisterShort, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CALVIN_1
-	release
+Route102_Text_RalphIntro:
+	.string "My friends dared me to\n"
+	.string "challenge the GYM.\p"
+	.string "I didn't stand a chance.$"
+
+Route102_Text_RalphDefeated:
+	.string "My poor BUGS! Forgive me!$"
+
+Route102_Text_RalphPostBattle:
+	.string "My BUGS will be always be\n"
+	.string "cool, even if they lose!$"
+
+Route102_EventScript_Gregory::
+	trainerbattle_single TRAINER_GREGORY, Route102_Text_GregoryIntro, Route102_Text_GregoryDefeated
+	msgbox Route102_Text_GregoryPostBattle, MSGBOX_AUTOCLOSE
 	end
 
-Route102_EventScript_CalvinTryRegister::
-	goto_if_set FLAG_HAS_MATCH_CALL, Route102_EventScript_CalvinRegister
-	msgbox Route102_Text_CalvinPostBattle, MSGBOX_DEFAULT
-	release
-	end
+Route102_Text_GregoryIntro:
+	.string "Dang, I was fast asleep\n"
+	.string "there!$"
 
-Route102_EventScript_CalvinRegister::
-	msgbox Route102_Text_CalvinRegister, MSGBOX_DEFAULT
-	register_matchcall TRAINER_CALVIN_1
-	release
-	end
+Route102_Text_GregoryDefeated:
+	.string "Seems my battle skills\n"
+	.string "were asleep too.$"
 
-Route102_EventScript_CalvinRematch::
-	trainerbattle_rematch TRAINER_CALVIN_1, Route102_Text_CalvinRematchIntro, Route102_Text_CalvinRematchDefeated
-	msgbox Route102_Text_CalvinRematchPostBattle, MSGBOX_AUTOCLOSE
+Route102_Text_GregoryPostBattle:
+	.string "Nothing beats a good nap!$"
+
+Route102_EventScript_Antidote::
+	finditem ITEM_ANTIDOTE
 	end
 
 Route102_EventScript_Rick::
@@ -95,10 +119,6 @@ Route102_Text_ImNotVeryTall:
 	.string "The grass goes up my nose and…\n"
 	.string "Fwafwafwafwafwa…\p"
 	.string "Fwatchoo!$"
-
-Route102_Text_CatchWholeBunchOfPokemon:
-	.string "I'm going to catch a whole bunch of\n"
-	.string "POKéMON!$"
 
 Route102_Text_RouteSignOldale:
 	.string "ROUTE 102\n"

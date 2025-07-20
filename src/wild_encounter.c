@@ -302,7 +302,7 @@ static u8 GetLevelCutoffByBadges(void)
     if(numOwnedBadges == 3) return 34;
     if(numOwnedBadges == 2) return 30;
     if(numOwnedBadges == 1) return 24;
-    return 1;
+    return 10;
 }
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
@@ -311,8 +311,6 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     u8 max;
     u8 range;
     u8 rand;
-    u8 levelAdd;
-    u8 increasedLevel;
     u8 levelCutoff = GetLevelCutoffByBadges();
 
     // NOTE: Changed so wild levels scale with number of badges obtained
@@ -327,26 +325,41 @@ static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
     }
     else
     {
+        // This logic means areas that should scale to allow for flexible
+        // travelling work.
+        // eg. Areas intended to be viable journey routes before and after
+        // acquiring badges
+        // But also allows the player to stumble upon areas with wild Pokemon
+        // that are high level relative to the player's progress.
+        // This should be done by setting higher minLevel
         if(levelCutoff > wildPokemon->maxLevel) max = wildPokemon->maxLevel;
-        else max = levelCutoff;
+        else
+        {
+            if(wildPokemon->minLevel > levelCutoff)
+            {
+                min = wildPokemon->minLevel;
+                max = wildPokemon->maxLevel;
+            }
+            else max = levelCutoff;
+        }
     }
 
     range = max - min + 1;
     rand = Random() % range;
 
     // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
-    {
-        min = wildPokemon->minLevel;
-        max = wildPokemon->maxLevel;
-    }
-    else
-    {
-        min = wildPokemon->maxLevel;
-        max = wildPokemon->minLevel;
-    }
-    range = max - min + 1;
-    rand = Random() % range;
+    // if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    // {
+    //     min = wildPokemon->minLevel;
+    //     max = wildPokemon->maxLevel;
+    // }
+    // else
+    // {
+    //     min = wildPokemon->maxLevel;
+    //     max = wildPokemon->minLevel;
+    // }
+    // range = max - min + 1;
+    // rand = Random() % range;
 
     // check ability for max level mon
     if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))

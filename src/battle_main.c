@@ -122,7 +122,7 @@ static void HandleEndTurn_MonFled(void);
 static void HandleEndTurn_FinishBattle(void);
 static void SpriteCB_UnusedBattleInit(struct Sprite *sprite);
 static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite);
-static u32 IsGymTrainer(u16 trainerNum);
+static u32 IsGymLeader(u16 trainerNum);
 
 EWRAM_DATA u16 gBattle_BG0_X = 0;
 EWRAM_DATA u16 gBattle_BG0_Y = 0;
@@ -1973,26 +1973,23 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
     }
 }
 
-static const u16 GymTrainerNums[GYM_TRAINERS_COUNT] =
+static const u16 GymLeaderTrainerNums[GYM_TRAINERS_COUNT] =
 {
     // Petalburg Gym
-    TRAINER_RANDALL,
-    TRAINER_MARY,
-    TRAINER_BERKE,
-    TRAINER_PARKER,
-    TRAINER_GEORGE,
-    TRAINER_ALEXIA,
-    TRAINER_JODY
+    TRAINER_NORMAN_1,
+    TRAINER_NORMAN_2,
+    TRAINER_NORMAN_3,
+    TRAINER_NORMAN_4
 };
 
-static u32 IsGymTrainer(u16 trainerNum)
+static u32 IsGymLeader(u16 trainerNum)
 {
     u32 i = 0;
     u32 j = 0;
 
     for(i = 0; i < GYM_TRAINERS_COUNT; i++)
     {
-        if(GymTrainerNums[i] == trainerNum) j++;
+        if(GymLeaderTrainerNums[i] == trainerNum) j++;
     }
 
     return j > 0;
@@ -2007,16 +2004,10 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 monsCount;
     u8 scaledLevel = 0;
     u8 monLevel;
-    u8 baseMonLevel = 12;
+    u16 badgesOwned = VarGet(VAR_NUMBER_OF_BADGES_OWNED);
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
-
-    if(IsGymTrainer(trainerNum))
-    {
-        u16 badgesOwned = VarGet(VAR_NUMBER_OF_BADGES_OWNED);
-        scaledLevel = baseMonLevel + (badgesOwned * 4);
-    }
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER && !(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER
                                                                         | BATTLE_TYPE_EREADER_TRAINER
@@ -2061,7 +2052,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                if(IsGymLeader(trainerNum))
+                {
+                    monLevel = partyData[i].lvl;
+                }
+                else
+                {
+                    scaledLevel = partyData[i].lvl + (badgesOwned * 4);
+                    monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                }
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 break;
             }
@@ -2074,7 +2073,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                if(IsGymLeader(trainerNum))
+                {
+                    monLevel = partyData[i].lvl;
+                }
+                else
+                {
+                    scaledLevel = partyData[i].lvl + (badgesOwned * 4);
+                    monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                }
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 for (j = 0; j < MAX_MON_MOVES; j++)
@@ -2093,7 +2100,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                if(IsGymLeader(trainerNum))
+                {
+                    monLevel = partyData[i].lvl;
+                }
+                else
+                {
+                    scaledLevel = partyData[i].lvl + (badgesOwned * 4);
+                    monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                }
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -2108,7 +2123,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
                 personalityValue += nameHash << 8;
                 fixedIV = partyData[i].iv * MAX_PER_STAT_IVS / 255;
-                monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                if(IsGymLeader(trainerNum))
+                {
+                    monLevel = partyData[i].lvl;
+                }
+                else
+                {
+                    scaledLevel = partyData[i].lvl + (badgesOwned * 4);
+                    monLevel = (scaledLevel > 0) ? scaledLevel : partyData[i].lvl;
+                }
                 CreateMon(&party[i], partyData[i].species, monLevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
 
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
@@ -5215,7 +5238,7 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     if (!gPaletteFade.active)
     {
         ResetSpriteData();
-        if (gLeveledUpInBattle == 0 || gBattleOutcome != B_OUTCOME_WON)
+        if (gLeveledUpInBattle == 0 || (gBattleOutcome != B_OUTCOME_WON && gBattleOutcome != B_OUTCOME_CAUGHT))
         {
             gBattleMainFunc = ReturnFromBattleToOverworld;
             return;
