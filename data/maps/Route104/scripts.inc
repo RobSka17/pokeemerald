@@ -138,13 +138,13 @@ Route104_Movement_PlayerMoveBackFromWoodsGuardSouth:
 
 Route104_Movement_WoodsGuardLeftMoveAwaySouth:
 	walk_down
-	walk_left
+	walk_right
 	walk_in_place_faster_down
 	step_end
 
 Route104_Movement_WoodsGuardRightMoveAwaySouth:
 	walk_down
-	walk_right
+	walk_left
 	walk_in_place_faster_down
 	step_end
 

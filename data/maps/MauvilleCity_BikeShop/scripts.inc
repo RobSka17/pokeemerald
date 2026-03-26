@@ -5,37 +5,45 @@ MauvilleCity_BikeShop_EventScript_Rydel::
 	lock
 	faceplayer
 	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_AskSwitchBikes
-	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
+	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_CheckHasBadges
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
-	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+	goto MauvilleCity_BikeShop_EventScript_CheckHasBadges
 	end
 
-MauvilleCity_BikeShop_EventScript_SkipGreeting::
-	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, YES, MauvilleCity_BikeShop_EventScript_YesFar
-	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
+MauvilleCity_BikeShop_EventScript_CheckHasBadges:
+	goto_if_gt VAR_NUMBER_OF_BADGES_OWNED, 1, MauvilleCity_BikeShop_EventScript_GiveBike
+	msgbox MauvilleCity_BikeShop_Text_ComeBackIfYouHaveBadges, MSGBOX_DEFAULT
+	release
 	end
+
+MauvilleCity_BikeShop_EventScript_GiveBike:
+	goto MauvilleCity_BikeShop_EventScript_ChooseBike
+	end
+
+MauvilleCity_BikeShop_Text_ComeBackIfYouHaveBadges:
+	.string "Do come back if you earn two\n"
+	.string "BADGES!$"
+
+MauvilleCity_BikeShop_Text_ThoseAreOfficialGymBadges:
+	.string "Ah, yes!\p"
+	.string "Those are definitely official POKéMON\n"
+	.string "LEAGUE GYM BADGES!\p"
+	.string "As I promised, I'll give you a BIKE!\n"
+	.string "Make sure you you ride it around a lot!\p"
+	.string "There are two types to choose from.\p"
+	.string "The MACH BIKE is fast! If you need speed,\n"
+	.string "the MACH is the one for you!\p"
+	.string "The ACRO BIKE is perfect for maneuvers!\n"
+	.string "There's no competitor in terms of control!\p"
+	.string "So, which is the BIKE for you?$"
 
 MauvilleCity_BikeShop_EventScript_ChooseBike::
-	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
+	message MauvilleCity_BikeShop_Text_ThoseAreOfficialGymBadges
 	waitmessage
 	multichoice 21, 8, MULTI_BIKE, TRUE
 	switch VAR_RESULT
 	case 0, MauvilleCity_BikeShop_EventScript_GetMachBike
 	case 1, MauvilleCity_BikeShop_EventScript_GetAcroBike
-	end
-
-MauvilleCity_BikeShop_EventScript_NotFar::
-	setflag FLAG_DECLINED_BIKE
-	msgbox MauvilleCity_BikeShop_Text_GuessYouDontNeedBike, MSGBOX_DEFAULT
-	release
-	end
-
-MauvilleCity_BikeShop_EventScript_YesFar::
-	setflag FLAG_RECEIVED_BIKE
-	goto MauvilleCity_BikeShop_EventScript_ChooseBike
 	end
 
 MauvilleCity_BikeShop_EventScript_GetMachBike::
@@ -175,44 +183,23 @@ MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 	end
 
 MauvilleCity_BikeShop_Text_RydelGreeting:
-	.string "Well, well, what have we here?\n"
-	.string "A most energetic customer!\p"
-	.string "Me? You may call me RYDEL.\n"
-	.string "I'm the owner of this cycle shop.$"
+	.string "Hey, there!\p"
+	.string "Would you, by any chance, be\n"
+	.string "a POKéMON TRAINER?\p"
+	.string "You see... I sell BIKES, and I\n"
+	.string "was thinking...\p"
+	.string "If people saw a strong TRAINER\n"
+	.string "riding one of my BIKES...\p"
+	.string "Well, it would be great advertising!\p"
+	.string "And in return, they could keep\n"
+	.string "the BIKE, of course!\p"
+	.string "I'd want such a TRAINER to have\n"
+	.string "proved their strength.\p"
+	.string "Let's see...\p"
+	.string "Two POKéMON LEAGUE GYM BADGES!\p"
+	.string "That's what I'd ask for in such\n"
+	.string "a TRAINER!$"
 
-MauvilleCity_BikeShop_Text_DidYouComeFromFarAway:
-	.string "RYDEL: Your RUNNING SHOES…\n"
-	.string "They're awfully filthy.\p"
-	.string "Did you come from far away?$"
-
-MauvilleCity_BikeShop_Text_GuessYouDontNeedBike:
-	.string "RYDEL: Is that right?\p"
-	.string "Then, I guess you have no need for\n"
-	.string "any of my BIKES.$"
-
-MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
-	.string "RYDEL: Hm, hm… … … … …\p"
-	.string "You're saying that you came all this\n"
-	.string "way from LITTLEROOT?\p"
-	.string "My goodness!\n"
-	.string "That's ridiculously far!\p"
-	.string "If you had one of my BIKES, you could\n"
-	.string "go anywhere easily while feeling the\l"
-	.string "gentle caress of the wind!\p"
-	.string "I'll tell you what!\n"
-	.string "I'll give you a BIKE!\p"
-	.string "Oh, wait a second!\p"
-	.string "I forgot to tell you that there are\n"
-	.string "two kinds of BIKES!\p"
-	.string "They are the MACH BIKE and\n"
-	.string "the ACRO BIKE!\p"
-	.string "The MACH BIKE is for cyclists who want\n"
-	.string "to feel the wind with their bodies!\p"
-	.string "And an ACRO BIKE is for those who\n"
-	.string "prefer technical rides!\p"
-	.string "I'm a real sweetheart, so you can\n"
-	.string "have whichever one you like!\p"
-	.string "Which one will you choose?$"
 
 MauvilleCity_BikeShop_Text_ChoseMachBike:
 	.string "{PLAYER} chose the MACH BIKE.$"

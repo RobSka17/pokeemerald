@@ -1068,3 +1068,7 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/maps/CelestialCavern_B2F_2R/scripts.inc"
 
 	.include "data/maps/CelestialCavern_DeoxysRoom/scripts.inc"
+
+	.include "data/maps/RusturfTunnel_1F_1R/scripts.inc"
+
+	.include "data/maps/RusturfTunner_1F_2R/scripts.inc"

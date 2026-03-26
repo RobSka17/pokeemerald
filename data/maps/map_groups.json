@@ -434,7 +434,9 @@
     "CelestialCavern_B1F",
     "CelestialCavern_B2F_1R",
     "CelestialCavern_B2F_2R",
-    "CelestialCavern_DeoxysRoom"
+    "CelestialCavern_DeoxysRoom",
+    "RusturfTunnel_1F_1R",
+    "RusturfTunner_1F_2R"
   ],
   "gMapGroup_IndoorDynamic": [
     "SecretBase_RedCave1",

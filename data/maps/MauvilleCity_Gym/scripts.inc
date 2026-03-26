@@ -74,14 +74,51 @@ MauvilleCity_Gym_EventScript_DeactivatePuzzle::
 	end
 
 MauvilleCity_Gym_EventScript_Wattson::
-	trainerbattle_single TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonIntro, MauvilleCity_Gym_Text_WattsonDefeat, MauvilleCity_Gym_EventScript_WattsonDefeated, NO_MUSIC
-	specialvar VAR_RESULT, ShouldTryRematchBattle
-	goto_if_eq VAR_RESULT, TRUE, MauvilleCity_Gym_EventScript_WattsonRematch
-	goto_if_unset FLAG_RECEIVED_TM_SHOCK_WAVE, MauvilleCity_Gym_EventScript_GiveShockWave2
-	goto_if_eq VAR_NEW_MAUVILLE_STATE, 2, MauvilleCity_Gym_EventScript_CompletedNewMauville
-	msgbox MauvilleCity_Gym_Text_WattsonPostBattle, MSGBOX_DEFAULT
+	lock
+	faceplayer
+	goto_if_unset FLAG_DEFEATED_MAUVILLE_GYM, MauvilleCity_Gym_EventScript_WattsonBattle
+	msgbox MauvilleCity_Gym_Text_WattsonPostBadge, MSGBOX_DEFAULT
 	release
 	end
+
+MauvilleCity_Gym_EventScript_WattsonBattle::
+	msgbox MauvilleCity_Gym_Text_WattsonIntro, MSGBOX_DEFAULT
+	switch VAR_NUMBER_OF_BADGES_OWNED
+	case 0, MauvilleCity_Gym_EventScript_SetUpWattsonBattle0Badges
+	case 1, MauvilleCity_Gym_EventScript_SetUpWattsonBattle1Badge
+	case 2, MauvilleCity_Gym_EventScript_SetUpWattsonBattle2Badges
+	case 3, MauvilleCity_Gym_EventScript_SetUpWattsonBattle3Badges
+	end
+
+MauvilleCity_Gym_EventScript_SetUpWattsonBattle0Badges:
+	trainerbattle_no_intro TRAINER_WATTSON_1, MauvilleCity_Gym_Text_WattsonDefeat
+	goto MauvilleCity_Gym_EventScript_WattsonDefeated
+	end
+
+MauvilleCity_Gym_EventScript_SetUpWattsonBattle1Badge:
+	trainerbattle_no_intro TRAINER_WATTSON_2, MauvilleCity_Gym_Text_WattsonDefeat
+	goto MauvilleCity_Gym_EventScript_WattsonDefeated
+	end
+
+MauvilleCity_Gym_EventScript_SetUpWattsonBattle2Badges:
+	trainerbattle_no_intro TRAINER_WATTSON_3, MauvilleCity_Gym_Text_WattsonDefeat
+	goto MauvilleCity_Gym_EventScript_WattsonDefeated
+	end
+
+MauvilleCity_Gym_EventScript_SetUpWattsonBattle3Badges:
+	trainerbattle_no_intro TRAINER_WATTSON_4, MauvilleCity_Gym_Text_WattsonDefeat
+	goto MauvilleCity_Gym_EventScript_WattsonDefeated
+	end
+
+MauvilleCity_Gym_Text_WattsonIntro:
+	.string "Wahahahah!\p"
+	.string "Another young trainer looking to\n"
+	.string "get their hands on a badge, eh?\p"
+	.string "Let's see how much power your\n"
+	.string "POKéMON can produce!$"
+
+MauvilleCity_Gym_Text_WattsonPostBadge:
+	.string "Add text later$"
 
 MauvilleCity_Gym_EventScript_WattsonDefeated::
 	message MauvilleCity_Gym_Text_ReceivedDynamoBadge
@@ -327,18 +364,6 @@ MauvilleCity_Gym_Text_VivianPostBattle:
 	.string "became TRAINERS.\l"
 	.string "He must know all sorts of things!$"
 
-MauvilleCity_Gym_Text_WattsonIntro:
-	.string "I've given up on my plans to convert\n"
-	.string "the city, I have.\p"
-	.string "And so, I put my time into making\n"
-	.string "door traps in my GYM.\p"
-	.string "Oh? Now, what are you doing here?\p"
-	.string "What's that? You say you've gotten\n"
-	.string "past all my rigged doors?\p"
-	.string "Wahahahah!\n"
-	.string "Now, that is amusing!\p"
-	.string "Then, I, WATTSON, the LEADER of\n"
-	.string "MAUVILLE GYM, shall electrify you!$"
 
 MauvilleCity_Gym_Text_WattsonDefeat:
 	.string "Wahahahah!\n"

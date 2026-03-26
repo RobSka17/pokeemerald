@@ -1973,13 +1973,19 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
     }
 }
 
-static const u16 GymLeaderTrainerNums[GYM_TRAINERS_COUNT] =
+static const u16 GymLeaderTrainerNums[GYM_LEADER_TRAINER_NUMS_COUNT] =
 {
     // Petalburg Gym
     TRAINER_NORMAN_1,
     TRAINER_NORMAN_2,
     TRAINER_NORMAN_3,
-    TRAINER_NORMAN_4
+    TRAINER_NORMAN_4,
+    
+    // Mauville Gym
+    TRAINER_WATTSON_1,
+    TRAINER_WATTSON_2,
+    TRAINER_WATTSON_3,
+    TRAINER_WATTSON_4
 };
 
 static u32 IsGymLeader(u16 trainerNum)
@@ -1987,7 +1993,7 @@ static u32 IsGymLeader(u16 trainerNum)
     u32 i = 0;
     u32 j = 0;
 
-    for(i = 0; i < GYM_TRAINERS_COUNT; i++)
+    for(i = 0; i < GYM_LEADER_TRAINER_NUMS_COUNT; i++)
     {
         if(GymLeaderTrainerNums[i] == trainerNum) j++;
     }

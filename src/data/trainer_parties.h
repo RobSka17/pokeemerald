@@ -161,6 +161,51 @@ static const struct TrainerMonNoItemDefaultMoves sParty_Christoph[] = {
 
 // Route 110 End
 
+// Route 111
+static const struct TrainerMonNoItemDefaultMoves sParty_Ron[] = {
+    {
+    .iv = 0,
+    .lvl = 7,
+    .species = SPECIES_SANDSHREW,
+    },
+    {
+    .iv = 0,
+    .lvl = 8,
+    .species = SPECIES_GEODUDE,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Frank[] = {
+    {
+    .iv = 0,
+    .lvl = 10,
+    .species = SPECIES_BUTTERFREE,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Lor[] = {
+    {
+    .iv = 0,
+    .lvl = 10,
+    .species = SPECIES_MAKUHITA,
+    },
+    {
+    .iv = 0,
+    .lvl = 10,
+    .species = SPECIES_HITMONCHAN,
+    }
+};
+
+static const struct TrainerMonNoItemDefaultMoves sParty_Sid[] = {
+    {
+    .iv = 0,
+    .lvl = 12,
+    .species = SPECIES_MANKEY,
+    }
+};
+
+// Route 111 End
+
 // Petalburg Gym
 
 static const struct TrainerMonItemCustomMoves sParty_Randall[] = {
@@ -1046,86 +1091,6 @@ static const struct TrainerMonNoItemCustomMoves sParty_Dusty5[] = {
     .lvl = 36,
     .species = SPECIES_SANDSLASH,
     .moves = {MOVE_DIG, MOVE_SLASH, MOVE_SAND_ATTACK, MOVE_POISON_STING}
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy1[] = {
-    {
-    .iv = 50,
-    .lvl = 17,
-    .species = SPECIES_MAGNEMITE,
-    },
-    {
-    .iv = 50,
-    .lvl = 17,
-    .species = SPECIES_WHISMUR,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy2[] = {
-    {
-    .iv = 100,
-    .lvl = 27,
-    .species = SPECIES_MAGNEMITE,
-    },
-    {
-    .iv = 100,
-    .lvl = 27,
-    .species = SPECIES_LOUDRED,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy3[] = {
-    {
-    .iv = 150,
-    .lvl = 30,
-    .species = SPECIES_MAGNETON,
-    },
-    {
-    .iv = 150,
-    .lvl = 30,
-    .species = SPECIES_LOUDRED,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy4[] = {
-    {
-    .iv = 200,
-    .lvl = 33,
-    .species = SPECIES_MAGNETON,
-    },
-    {
-    .iv = 200,
-    .lvl = 33,
-    .species = SPECIES_LOUDRED,
-    }
-};
-
-static const struct TrainerMonNoItemDefaultMoves sParty_GabbyAndTy5[] = {
-    {
-    .iv = 250,
-    .lvl = 36,
-    .species = SPECIES_MAGNETON,
-    },
-    {
-    .iv = 250,
-    .lvl = 36,
-    .species = SPECIES_LOUDRED,
-    }
-};
-
-static const struct TrainerMonNoItemCustomMoves sParty_GabbyAndTy6[] = {
-    {
-    .iv = 250,
-    .lvl = 39,
-    .species = SPECIES_MAGNETON,
-    .moves = {MOVE_SONIC_BOOM, MOVE_THUNDER_WAVE, MOVE_METAL_SOUND, MOVE_THUNDERBOLT}
-    },
-    {
-    .iv = 250,
-    .lvl = 39,
-    .species = SPECIES_EXPLOUD,
-    .moves = {MOVE_ASTONISH, MOVE_STOMP, MOVE_SUPERSONIC, MOVE_HYPER_VOICE}
     }
 };
 

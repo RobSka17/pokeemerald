@@ -4460,6 +4460,26 @@
       "secondary_tileset": "gTileset_Cave",
       "border_filepath": "data/layouts/CelestialCavern_DeoxysRoom/border.bin",
       "blockdata_filepath": "data/layouts/CelestialCavern_DeoxysRoom/map.bin"
+    },
+    {
+      "id": "LAYOUT_RUSTURF_TUNNEL_1F_1R",
+      "name": "RusturfTunnel_1F_1R_Layout",
+      "width": 13,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_RusturfTunnel",
+      "border_filepath": "data/layouts/RusturfTunnel_1F_1R/border.bin",
+      "blockdata_filepath": "data/layouts/RusturfTunnel_1F_1R/map.bin"
+    },
+    {
+      "id": "LAYOUT_RUSTURF_TUNNER_1F_2R",
+      "name": "RusturfTunner_1F_2R_Layout",
+      "width": 15,
+      "height": 12,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_RusturfTunnel",
+      "border_filepath": "data/layouts/RusturfTunner_1F_2R/border.bin",
+      "blockdata_filepath": "data/layouts/RusturfTunner_1F_2R/map.bin"
     }
   ]
 }

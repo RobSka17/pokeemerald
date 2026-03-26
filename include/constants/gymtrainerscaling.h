@@ -1,1 +1,1 @@
-#define GYM_TRAINERS_COUNT                  7
+#define GYM_LEADER_TRAINER_NUMS_COUNT                  8

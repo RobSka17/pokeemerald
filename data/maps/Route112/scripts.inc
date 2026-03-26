@@ -32,3 +32,33 @@ Route112_Text_RouteSignLavaridge:
 	.string "ROUTE 112\n"
 	.string "{LEFT_ARROW} LAVARIDGE TOWN$"
 
+Route112_EventScript_WooperLady::
+	lock
+	faceplayer
+	msgbox Route112_Text_WooperLady, MSGBOX_DEFAULT
+	release
+	end
+
+Route112_Text_WooperLady:
+	.string "MT. CHIMNEY has been more active\n"
+	.string "recently.\p"
+	.string "It's impacting air humidity\n"
+	.string "and launching ash into the air.\p"
+	.string "The flora is sensitive to\n"
+	.string "these kinds of changes.\p"
+	.string "That's why WOOPER and I are out\n"
+	.string "here watering.\p"
+	.string "It's a real challenge, though.\p"
+	.string "I don't know how much more of\n"
+	.string "this the environment can take.$"
+
+Route112_EventScript_Wooper::
+	lock
+	faceplayer
+	msgbox Route112_Text_Wooper, MSGBOX_DEFAULT
+	release
+	end
+
+Route112_Text_Wooper:
+	.string "Paaaa!$"
+

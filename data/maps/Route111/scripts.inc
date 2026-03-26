@@ -52,7 +52,6 @@ Route111_OnTransition:
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 1, Route111_EventScript_SetFallingPlayerGfx
 	call_if_eq VAR_MIRAGE_TOWER_STATE, 2, Route111_EventScript_SetMirageTowerGone
 	call Route111_EventScript_CheckSetSandstorm
-	call GabbyAndTy_EventScript_UpdateLocation
 	goto_if_not_defeated TRAINER_VICKY, Route111_EventScript_SetWinstratesNotDefeated
 	end
 
@@ -142,17 +141,6 @@ Route111_EventScript_RootFossilDisappeared::
 	releaseall
 	end
 
-@ Unused
-Route111_Movement_PlayerFall::
-	lock_anim
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	walk_fast_down
-	step_end
-
 Route111_EventScript_Girl::
 	lock
 	faceplayer
@@ -172,13 +160,6 @@ Route111_EventScript_ReceivedBerry::
 	release
 	end
 
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerUp::
-	lockall
-	setvar VAR_0x8004, 0
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
 Route111_EventScript_ViciousSandstormTriggerDown::
 	lockall
 	setvar VAR_0x8004, 1
@@ -188,13 +169,6 @@ Route111_EventScript_ViciousSandstormTriggerDown::
 Route111_EventScript_ViciousSandstormTriggerLeft::
 	lockall
 	setvar VAR_0x8004, 2
-	goto Route111_EventScript_ViciousSandstormTrigger
-	end
-
-@ Unused
-Route111_EventScript_ViciousSandstormTriggerRight::
-	lockall
-	setvar VAR_0x8004, 3
 	goto Route111_EventScript_ViciousSandstormTrigger
 	end
 
@@ -263,6 +237,74 @@ Route111_EventScript_SandstormTrigger::
 	fadenewbgm MUS_DESERT
 	doweather
 	end
+
+Route111_EventScript_Ron::
+	trainerbattle_single TRAINER_RON, Route111_Text_RonIntro, Route111_Text_RonDefeat
+	msgbox Route111_Text_RonPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_Text_RonIntro:
+	.string "I got lost in the desert up north!\p"
+	.string "Lucky my POKéMON helped me out!$"
+
+Route111_Text_RonDefeat:
+	.string "Battlin's as harsh as the sands!$"
+
+Route111_Text_RonPostBattle:
+	.string "I made the mistake of goin' into\n"
+	.string "the desert without GO-GOGGLES!\p"
+	.string "My POKéMON dragged me out of\n"
+	.string "the sandstorm!$"
+
+Route111_EventScript_Frank::
+	trainerbattle_single TRAINER_FRANK, Route111_Text_FrankIntro, Route111_Text_FrankDefeat
+	msgbox Route111_Text_FrankPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_Text_FrankIntro:
+	.string "I found a really pretty POKéMON!$"
+
+Route111_Text_FrankDefeat:
+	.string "You still can't deny it's pretty!$"
+
+Route111_Text_FrankPostBattle:
+	.string "The natural world is full of so much\n"
+	.string "beauty!$"
+
+Route111_EventScript_Lor::
+	trainerbattle_single TRAINER_LOR, Route111_Text_LorIntro, Route111_Text_LorDefeat
+	msgbox Route111_Text_LorPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_Text_LorIntro:
+	.string "One, two! One, two! I'm training\n"
+	.string "my POKéMON to take on the GYM!$"
+
+Route111_Text_LorDefeat:
+	.string "We need more training!$"
+
+Route111_Text_LorPostBattle:
+	.string "Some places are off limits these\n"
+	.string "days if you don't have badges.$"
+
+Route111_EventScript_Sid::
+	trainerbattle_single TRAINER_SID, Route111_Text_SidIntro, Route111_Text_SidDefeat
+	msgbox Route111_Text_SidPostBattle, MSGBOX_DEFAULT
+	release
+	end
+
+Route111_Text_SidIntro:
+	.string "HYAAAHHH! Go, my raging POKéMON!$"
+
+Route111_Text_SidDefeat:
+	.string "YAAARRGH!$"
+
+Route111_Text_SidPostBattle:
+	.string "I gotta get more pumped up next\n"
+	.string "time!$"
 
 Route111_EventScript_Victor::
 	lock
@@ -477,16 +519,6 @@ Route111_EventScript_RematchDusty::
 	msgbox Route111_Text_DustyPostRematch, MSGBOX_AUTOCLOSE
 	end
 
-Route111_EventScript_Travis::
-	trainerbattle_single TRAINER_TRAVIS, Route111_Text_TravisIntro, Route111_Text_TravisDefeat
-	msgbox Route111_Text_TravisPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Irene::
-	trainerbattle_single TRAINER_IRENE, Route111_Text_IreneIntro, Route111_Text_IreneDefeat
-	msgbox Route111_Text_IrenePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 Route111_EventScript_Daisuke::
 	trainerbattle_single TRAINER_DAISUKE, Route111_Text_DaisukeIntro, Route111_Text_DaisukeDefeat
 	msgbox Route111_Text_DaisukePostBattle, MSGBOX_AUTOCLOSE
@@ -532,26 +564,6 @@ Route111_EventScript_RegisterBrooke::
 Route111_EventScript_RematchBrooke::
 	trainerbattle_rematch TRAINER_BROOKE_1, Route111_Text_BrookeRematchIntro, Route111_Text_BrookeRematchDefeat
 	msgbox Route111_Text_BrookePostRematch, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Hayden::
-	trainerbattle_single TRAINER_HAYDEN, Route111_Text_HaydenIntro, Route111_Text_HaydenDefeat
-	msgbox Route111_Text_HaydenPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Bianca::
-	trainerbattle_single TRAINER_BIANCA, Route111_Text_BiancaIntro, Route111_Text_BiancaDefeat
-	msgbox Route111_Text_BiancaPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Tyron::
-	trainerbattle_single TRAINER_TYRON, Route111_Text_TyronIntro, Route111_Text_TyronDefeat
-	msgbox Route111_Text_TyronPostBattle, MSGBOX_AUTOCLOSE
-	end
-
-Route111_EventScript_Celina::
-	trainerbattle_single TRAINER_CELINA, Route111_Text_CelinaIntro, Route111_Text_CelinaDefeat
-	msgbox Route111_Text_CelinaPostBattle, MSGBOX_AUTOCLOSE
 	end
 
 Route111_EventScript_Celia::
